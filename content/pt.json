@@ -15,7 +15,8 @@
     "cta": "Fale com a Arke",
     "menu": "Menu",
     "skip": "Pular para o conteúdo",
-    "lang_label": "Idioma"
+    "lang_label": "Idioma",
+    "model": "Contratação"
   },
   "hero": {
     "eyebrow": "Software sob medida · Engenharia & Negócios",
@@ -28,7 +29,52 @@
     "frame_a": "Análise geoespacial · camadas ponderadas",
     "frame_b": "Inspeção de rodovias · detecção automática",
     "alt_a": "Interface de uma ferramenta de análise geoespacial com três mapas de calor lado a lado e controles de peso por camada.",
-    "alt_b": "Trecho de rodovia filmado com remendos e trincas marcados automaticamente por caixas de detecção."
+    "alt_b": "Trecho de rodovia filmado com remendos e trincas marcados automaticamente por caixas de detecção.",
+    "card": {
+      "label": "Projetos em produção",
+      "rows": [
+        {
+          "name": "Sistema multi-agente",
+          "meta": "Enterprise",
+          "a_label": "Antes",
+          "a": "1 mês",
+          "mid": "por ciclo",
+          "b_label": "Depois",
+          "b": "40 min"
+        },
+        {
+          "name": "Inspeção de rodovias",
+          "meta": "Setor público",
+          "a_label": "Entrada",
+          "a": "Vídeo",
+          "mid": "IA",
+          "b_label": "Saída",
+          "b": "Relatório"
+        }
+      ]
+    },
+    "points": [
+      {
+        "icon": "scan",
+        "text": "Diagnóstico antes do código"
+      },
+      {
+        "icon": "doc",
+        "text": "Escopo e marcos por escrito"
+      },
+      {
+        "icon": "lock",
+        "text": "Propriedade definida em contrato"
+      },
+      {
+        "icon": "flag",
+        "text": "Implantação assistida"
+      },
+      {
+        "icon": "loop",
+        "text": "Evolução sob demanda"
+      }
+    ]
   },
   "proof": {
     "eyebrow": "Autoridade",

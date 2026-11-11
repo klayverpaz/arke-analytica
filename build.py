@@ -25,6 +25,12 @@ ICONS = {
     "bars": '<path d="M4 20V11M10 20V4M16 20v-6M3 20.5h18"/><path d="M20.5 20V8.5"/>',
     "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
     "mail": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/>',
+    "scan": '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+    "doc": '<path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10.500A.5.5 0 0 1 6.500 20V4a.5.5 0 0 1 .5-.5z"/><path d="M9.500 12h5M9.500 15.500h5"/>',
+    "lock": '<rect x="5" y="10.500" width="14" height="10" rx="2"/><path d="M8.500 10.500V8a3.500 3.500 0 0 1 7 0v2.500"/>',
+    "flag": '<path d="M6 21V4M6 4.500h11l-2 3.750 2 3.750H6"/>',
+    "loop": '<path d="M4.500 12a7.500 7.500 0 0 1 13-5.100L19.500 9M19.500 4.500V9H15M19.500 12a7.500 7.500 0 0 1-13 5.100L4.500 15M4.500 19.500V15H9"/>',
+    "up": '<path d="M7 17L17 7M9 7h8v8"/>',
     "arrow": '<path d="M5 12h14M13 6l6 6-6 6"/>',
     "whatsapp": '<path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.500 6.2 6.2l.9-1.300-1.800-1-.8.700c-1-.4-2.300-1.700-2.700-2.700l.7-.800-1-1.800z"/>',
 }
@@ -58,7 +64,7 @@ def head(c, root, path, alt_path, title=None, x_default="pt/"):
 <meta property="og:description" content="{e(c['meta']['description'])}">
 <meta property="og:url" content="{BASE_URL}{path}">
 <meta property="og:locale" content="{c['lang'].replace('-', '_')}">
-<meta name="theme-color" content="#080B12">
+<meta name="theme-color" content="#060A14">
 <link rel="icon" href="{root}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +76,8 @@ def head(c, root, path, alt_path, title=None, x_default="pt/"):
 
 def header(c, root, home, other_href):
     n = c["nav"]
-    pt_href, en_href = ("#top" if home == "" else home, other_href) if c["code"] == "pt" else (other_href, "#top" if home == "" else home)
+    here = "#top" if home == "" else home
+    pt_href, en_href = (here, other_href) if c["code"] == "pt" else (other_href, here)
     cur = c["code"]
 
     def lang_link(code, href, label):
@@ -84,11 +91,16 @@ def header(c, root, home, other_href):
     <a class="brand" href="{home or '#top'}">{wordmark()}</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">{e(n['menu'])}</button>
     <nav class="site-nav" id="site-nav" aria-label="{e(n['menu'])}">
-      <a href="{home}#solucoes">{e(n['solutions'])}</a>
-      <a href="{home}#projetos">{e(n['projects'])}</a>
-      <a href="{home}#metodologia">{e(n['method'])}</a>
-      <span class="lang" role="group" aria-label="{e(n['lang_label'])}">{lang_link('pt', pt_href, 'PT')}<span aria-hidden="true">/</span>{lang_link('en', en_href, 'EN')}</span>
-      <a class="btn btn-primary btn-sm" href="{home}#contato">{e(n['cta'])}</a>
+      <div class="nav-pill">
+        <a href="{home}#solucoes">{e(n['solutions'])}</a>
+        <a href="{home}#projetos">{e(n['projects'])}</a>
+        <a href="{home}#metodologia">{e(n['method'])}</a>
+        <a href="{home}#contratacao">{e(n['model'])}</a>
+      </div>
+      <div class="header-end">
+        <span class="lang" role="group" aria-label="{e(n['lang_label'])}">{lang_link('pt', pt_href, 'PT')}{lang_link('en', en_href, 'EN')}</span>
+        <a class="btn btn-primary btn-sm" href="{home}#contato">{e(n['cta'])}</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -134,30 +146,32 @@ def render_home(c):
     privacy_href = c["privacy"]["slug"] + "/"
     out = [head(c, root, f"{c['code']}/", f"{c['other_code']}/"), header(c, root, "", f"../{c['other_code']}/")]
 
+    rows = "".join(
+        f'<li class="glass-row"><p class="glass-row-head"><strong>{e(r["name"])}</strong><span>{e(r["meta"])}</span></p>'
+        f'<div class="glass-row-body"><p><span>{e(r["a_label"])}</span><b>{e(r["a"])}</b></p><i>{e(r["mid"])}</i>'
+        f'<p class="end"><span>{e(r["b_label"])}</span><b>{e(r["b"])}</b></p></div></li>'
+        for r in h["card"]["rows"])
+    points = "".join(f'<li>{icon(pt_["icon"], "icon icon-sm")}<span>{e(pt_["text"])}</span></li>' for pt_ in h["points"])
     out.append(f"""<main id="main">
 <section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow">{e(h['eyebrow'])}</p>
-      <h1>{' '.join(f'<span>{e(part)}</span>' for part in h['title'].replace('. ', '.|').split('|'))}</h1>
-      <p class="lead">{e(h['lead'])}</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#contato">{e(h['cta'])}</a>
-        <a class="btn btn-ghost" href="#projetos">{e(h['secondary'])} {icon('arrow', 'icon icon-sm')}</a>
-      </div>
+  <div class="flutes" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <aside class="glass hero-card" aria-label="{e(h['card']['label'])}">
       <p class="badge"><span class="badge-dot" aria-hidden="true"></span>{e(h['badge'])}</p>
+      <ul>{rows}</ul>
       <p class="footnote">{e(h['footnote'])}</p>
+    </aside>
+    <div class="hero-main">
+      <div class="hero-copy">
+        <h1>{' '.join(f'<span>{e(part)}</span>' for part in h['title'].replace('. ', '.|').split('|'))}</h1>
+        <p class="lead">{e(h['lead'])}</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contato">{e(h['cta'])} {icon('up', 'icon icon-sm')}</a>
+        <a class="btn btn-text" href="#projetos">{e(h['secondary'])} {icon('up', 'icon icon-sm')}</a>
+      </div>
     </div>
-    <div class="hero-visual">
-      <figure class="frame frame-a">
-        <figcaption><span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>{e(h['frame_a'])}</figcaption>
-        <img src="{root}assets/img/biblioteca-geoespacial.webp" width="1600" height="722" alt="{e(h['alt_a'])}" fetchpriority="high">
-      </figure>
-      <figure class="frame frame-b">
-        <figcaption><span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>{e(h['frame_b'])}</figcaption>
-        <img src="{root}assets/img/inspecao-rodovias.webp" width="1400" height="784" alt="{e(h['alt_b'])}">
-      </figure>
-    </div>
+    <ul class="hero-points">{points}</ul>
   </div>
 </section>
 """)
@@ -261,6 +275,7 @@ def render_home(c):
         for num, shown in WHATSAPP)
     msg = e(json.dumps({"intro": f["msg_intro"], "labels": f["msg_labels"], "skip": f["budget_options"][0]}, ensure_ascii=False))
     out.append(f"""<section class="section section-contact" id="contato">
+  <div class="flutes" aria-hidden="true"></div>
   <div class="container contact-grid">
     <div data-reveal>
       <p class="eyebrow">{e(ct['eyebrow'])}</p>
@@ -272,7 +287,7 @@ def render_home(c):
         <li><a class="contact-link" href="mailto:{EMAIL}" aria-label="{e(ct['email_label'])}: {EMAIL}">{icon('mail')}<span>{EMAIL}</span></a></li>
       </ul>
     </div>
-    <form class="form" id="contact-form" novalidate data-wa-number="{WHATSAPP[0][0]}" data-msg="{msg}" data-reveal>
+    <form class="form glass" id="contact-form" novalidate data-wa-number="{WHATSAPP[0][0]}" data-msg="{msg}" data-reveal>
       <div class="field"><label for="f-name">{e(f['name'])}</label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field"><label for="f-company">{e(f['company'])}</label><input id="f-company" name="company" autocomplete="organization"></div>
       <div class="field"><label for="f-email">{e(f['email'])}</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>

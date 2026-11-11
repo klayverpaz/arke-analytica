@@ -22,6 +22,14 @@
     });
   }
 
+  // Cabeçalho ganha fundo ao rolar
+  var head = document.querySelector('.site-header');
+  if (head) {
+    var onScroll = function () { head.classList.toggle('is-scrolled', window.scrollY > 24); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
   // Idioma: guarda a escolha para o redirecionamento da raiz
   var remember = function (lang) {
     try { localStorage.setItem('arke-lang', lang); } catch (err) { /* sem storage */ }

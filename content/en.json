@@ -15,7 +15,8 @@
     "cta": "Talk to Arke",
     "menu": "Menu",
     "skip": "Skip to content",
-    "lang_label": "Language"
+    "lang_label": "Language",
+    "model": "Engagement"
   },
   "hero": {
     "eyebrow": "Custom software · Engineering & Business",
@@ -28,7 +29,52 @@
     "frame_a": "Geospatial analysis · weighted layers",
     "frame_b": "Road inspection · automated detection",
     "alt_a": "Interface of a geospatial analysis tool showing three heat maps side by side with per-layer weight controls.",
-    "alt_b": "Filmed stretch of road with patches and cracks marked automatically by detection boxes."
+    "alt_b": "Filmed stretch of road with patches and cracks marked automatically by detection boxes.",
+    "card": {
+      "label": "Projects in production",
+      "rows": [
+        {
+          "name": "Multi-agent system",
+          "meta": "Enterprise",
+          "a_label": "Before",
+          "a": "1 month",
+          "mid": "per cycle",
+          "b_label": "After",
+          "b": "40 min"
+        },
+        {
+          "name": "Road inspection",
+          "meta": "Public sector",
+          "a_label": "Input",
+          "a": "Video",
+          "mid": "AI",
+          "b_label": "Output",
+          "b": "Report"
+        }
+      ]
+    },
+    "points": [
+      {
+        "icon": "scan",
+        "text": "Diagnosis before code"
+      },
+      {
+        "icon": "doc",
+        "text": "Scope and milestones in writing"
+      },
+      {
+        "icon": "lock",
+        "text": "Ownership defined by contract"
+      },
+      {
+        "icon": "flag",
+        "text": "Assisted rollout"
+      },
+      {
+        "icon": "loop",
+        "text": "Evolution on demand"
+      }
+    ]
   },
   "proof": {
     "eyebrow": "Track record",

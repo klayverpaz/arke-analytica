@@ -1,0 +1,343 @@
+{
+  "lang": "pt-BR",
+  "code": "pt",
+  "other_code": "en",
+  "other_label": "English",
+  "meta": {
+    "title": "Arke Analytica — Desenvolvimento de software sob medida",
+    "description": "Engenharia de software, automação e aplicações com IA construídas ao redor do seu negócio. Do diagnóstico à implantação.",
+    "descriptor": "Soluções Tecnológicas"
+  },
+  "nav": {
+    "solutions": "Soluções",
+    "projects": "Projetos",
+    "method": "Como trabalhamos",
+    "cta": "Fale com a Arke",
+    "menu": "Menu",
+    "skip": "Pular para o conteúdo",
+    "lang_label": "Idioma"
+  },
+  "hero": {
+    "eyebrow": "Software sob medida · Engenharia & Negócios",
+    "title": "Seu negócio é único. Seu software também deveria ser.",
+    "lead": "Entendemos a complexidade da sua operação e desenvolvemos soluções tecnológicas que se adaptam aos seus processos — não o contrário.",
+    "cta": "Converse sobre seu projeto",
+    "secondary": "Explore nossos projetos",
+    "badge": "Primeira versão operacional em até 1 semana*",
+    "footnote": "*Para projetos elegíveis, após diagnóstico e aprovação do escopo. Prazo sujeito à complexidade, integrações e disponibilidade do cliente.",
+    "frame_a": "Análise geoespacial · camadas ponderadas",
+    "frame_b": "Inspeção de rodovias · detecção automática",
+    "alt_a": "Interface de uma ferramenta de análise geoespacial com três mapas de calor lado a lado e controles de peso por camada.",
+    "alt_b": "Trecho de rodovia filmado com remendos e trincas marcados automaticamente por caixas de detecção."
+  },
+  "proof": {
+    "eyebrow": "Autoridade",
+    "title": "Experiência que se traduz em soluções reais.",
+    "stats": [
+      {
+        "value": "1 mês → 40 min",
+        "label": "um ciclo operacional enterprise, depois do sistema multi-agente"
+      },
+      {
+        "value": "+6 anos",
+        "label": "de IA e machine learning em produção, do setor público ao enterprise"
+      },
+      {
+        "value": "2 países",
+        "label": "engenharia no Brasil e pesquisa aplicada nos Estados Unidos"
+      },
+      {
+        "value": "Padrão",
+        "label": "sistema de inspeção de rodovias adotado como padrão no setor público"
+      }
+    ],
+    "note": "Fatos dos projetos em que os engenheiros do nosso time trabalharam."
+  },
+  "solutions": {
+    "eyebrow": "Soluções",
+    "title": "Software pensado para o problema. Projetado para a operação.",
+    "lead": "Construímos produtos e sistemas que eliminam limitações, conectam processos e tornam operações complexas mais eficientes.",
+    "items": [
+      {
+        "icon": "grid",
+        "title": "Sistemas de gestão personalizados",
+        "text": "Fluxos, regras e dados específicos do seu negócio em uma única plataforma."
+      },
+      {
+        "icon": "window",
+        "title": "Plataformas e aplicações web",
+        "text": "Produtos digitais para equipes, clientes e parceiros."
+      },
+      {
+        "icon": "flow",
+        "title": "Automação de processos",
+        "text": "Menos trabalho manual e menos retrabalho nas rotinas que se repetem."
+      },
+      {
+        "icon": "nodes",
+        "title": "Integrações e arquitetura de sistemas",
+        "text": "Conexão entre as ferramentas e os dados que a operação já usa."
+      },
+      {
+        "icon": "spark",
+        "title": "Aplicações com inteligência artificial",
+        "text": "Automação e apoio a decisões onde houver valor real."
+      },
+      {
+        "icon": "bars",
+        "title": "Dados e dashboards",
+        "text": "Visibilidade operacional e indicadores para a gestão."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Projetos selecionados",
+    "title": "Soluções desenvolvidas para desafios concretos.",
+    "lead": "Projetos entregues pelos engenheiros do nosso time. Os clientes não são identificados por confidencialidade.",
+    "labels": {
+      "challenge": "Desafio",
+      "solution": "Solução",
+      "result": "Resultado"
+    },
+    "items": [
+      {
+        "segment": "Setor público",
+        "title": "Inspeção de rodovias por IA",
+        "challenge": "Transformar quilômetros de filmagem de rodovias em um relatório objetivo de condição do pavimento.",
+        "solution": "Ensemble de redes neurais que detecta buracos, trincas e remendos automaticamente.",
+        "result": "Adotado como padrão de inspeção de rodovias no setor público.",
+        "image": "inspecao-rodovias.webp",
+        "w": 1400,
+        "h": 784,
+        "alt": "Trecho de rodovia com remendos e trincas marcados por caixas de detecção automática."
+      },
+      {
+        "segment": "Enterprise",
+        "title": "Sistema multi-agente",
+        "challenge": "Um fluxo operacional que levava um mês por ciclo.",
+        "solution": "Sistema multi-agente em produção, operando o fluxo de ponta a ponta.",
+        "result": "Ciclo fechando em cerca de 40 minutos.",
+        "figure": {
+          "from": "1 mês",
+          "to": "40 min",
+          "caption": "por ciclo operacional"
+        }
+      },
+      {
+        "segment": "Pesquisa · Estados Unidos",
+        "title": "Biblioteca geoespacial",
+        "challenge": "Levar dados urbanos de fontes e geometrias diferentes para uma mesma grade de análise.",
+        "solution": "Biblioteca de rasterização calibrada, com peso configurável por camada.",
+        "result": "Adotada por um framework de análise urbana de uma universidade de Nova York.",
+        "image": "biblioteca-geoespacial.webp",
+        "w": 1600,
+        "h": 722,
+        "alt": "Ferramenta de análise geoespacial com mapas de calor de hotéis, negócios e pontos de interesse."
+      },
+      {
+        "segment": "Startup · Construção",
+        "title": "Analytics para construção",
+        "challenge": "Antecipar atrasos de cronograma e geração de resíduos em obras.",
+        "solution": "Modelos de machine learning que integram dados de milhares de obras.",
+        "result": "",
+        "figure": {
+          "to": "Milhares de obras",
+          "caption": "em uma mesma base de previsão"
+        }
+      }
+    ]
+  },
+  "segments": {
+    "eyebrow": "Segmentos",
+    "title": "Entendemos operações diferentes. Construímos soluções específicas.",
+    "items": [
+      {
+        "title": "Construção civil",
+        "text": "Obras, equipes, atividades e controle operacional."
+      },
+      {
+        "title": "E-commerce",
+        "text": "Pedidos, integrações, gestão e automação comercial."
+      },
+      {
+        "title": "Saúde",
+        "text": "Processos administrativos, atendimento e informação, observando requisitos de privacidade."
+      },
+      {
+        "title": "Educação",
+        "text": "Plataformas, gestão acadêmica e fluxos de aprendizagem."
+      }
+    ]
+  },
+  "challenges": {
+    "eyebrow": "Desafios que resolvemos",
+    "title": "Quando o software limita o negócio, é hora de construir diferente.",
+    "items": [
+      "Ferramentas prontas que não atendem às regras da operação.",
+      "Processos alterados para contornar limitações do sistema.",
+      "Baixa adoção e excesso de complexidade para as equipes.",
+      "Planilhas, tarefas manuais e dados fragmentados.",
+      "Licenças recorrentes sem aderência suficiente às necessidades.",
+      "Necessidade de construir tecnologia sem montar uma equipe interna."
+    ],
+    "closing": "A resposta não é necessariamente mais uma ferramenta. É a solução certa para o processo certo."
+  },
+  "method": {
+    "eyebrow": "Metodologia",
+    "title": "Rigor no processo. Clareza em cada entrega.",
+    "deliverables": "Entregáveis",
+    "steps": [
+      {
+        "title": "Imersão e diagnóstico",
+        "text": "Entendimento do negócio, dos processos, dos usuários e das limitações existentes.",
+        "out": [
+          "Mapa do processo atual",
+          "Limitações e prioridades"
+        ]
+      },
+      {
+        "title": "Arquitetura e desenho",
+        "text": "Solução proposta, fluxos, prioridades e requisitos.",
+        "out": [
+          "Desenho da solução",
+          "Fluxos e requisitos"
+        ]
+      },
+      {
+        "title": "Escopo e validação",
+        "text": "Entregáveis, critérios de aceite, cronograma e investimento.",
+        "out": [
+          "Escopo por escrito",
+          "Critérios de aceite",
+          "Cronograma e investimento"
+        ]
+      },
+      {
+        "title": "Engenharia e testes",
+        "text": "Desenvolvimento, validações e acompanhamento dos marcos.",
+        "out": [
+          "Versões por marco",
+          "Validações com a equipe"
+        ]
+      },
+      {
+        "title": "Implantação assistida",
+        "text": "Entrada em operação, orientação e ajustes contratados.",
+        "out": [
+          "Sistema em operação",
+          "Orientação do time"
+        ]
+      },
+      {
+        "title": "Evolução",
+        "text": "Manutenção e melhorias opcionais após a entrega.",
+        "out": [
+          "Manutenção",
+          "Novas funcionalidades"
+        ]
+      }
+    ],
+    "speed": "Em projetos de escopo controlado, a primeira versão pode entrar em operação em 1 semana após a aprovação do escopo."
+  },
+  "model": {
+    "eyebrow": "Modelo de contratação",
+    "title": "Uma relação transparente. Uma solução feita para durar.",
+    "items": [
+      {
+        "title": "Projeto sob medida",
+        "text": "Escopo, marcos, investimento e entregáveis acordados antes do início."
+      },
+      {
+        "title": "Propriedade definida",
+        "text": "Direitos de uso, código e propriedade intelectual conforme contrato."
+      },
+      {
+        "title": "Sem licença obrigatória da Arke",
+        "text": "Não há mensalidade de licenciamento da Arke para uso do software entregue, quando assim contratado. Infraestrutura, APIs e serviços de terceiros podem gerar custos."
+      },
+      {
+        "title": "Suporte e evolução sob demanda",
+        "text": "Contratação opcional de manutenção, sustentação e novas funcionalidades."
+      }
+    ],
+    "cta": "Solicite uma avaliação do projeto"
+  },
+  "contact": {
+    "eyebrow": "Contato",
+    "title": "O próximo software da sua empresa começa com uma conversa.",
+    "lead": "Conte o desafio que precisa resolver. Nossa equipe avalia o contexto, as possibilidades técnicas e o melhor caminho para o projeto.",
+    "direct": "Ou fale direto",
+    "email_label": "E-mail",
+    "form": {
+      "name": "Nome",
+      "company": "Empresa",
+      "email": "E-mail",
+      "phone": "WhatsApp",
+      "challenge": "Qual desafio você precisa resolver?",
+      "timeline": "Prazo desejado",
+      "budget": "Faixa de investimento (opcional)",
+      "budget_options": [
+        "Prefiro não informar",
+        "Até R$ 20 mil",
+        "R$ 20 mil a R$ 60 mil",
+        "R$ 60 mil a R$ 150 mil",
+        "Acima de R$ 150 mil"
+      ],
+      "consent": "Concordo em enviar estes dados à Arke Analytica para contato sobre o projeto, conforme a",
+      "privacy": "política de privacidade",
+      "submit": "Converse com a Arke",
+      "hint": "O envio abre o WhatsApp com a sua mensagem pronta. Nada é armazenado neste site.",
+      "error": "Preencha os campos obrigatórios e aceite a política de privacidade.",
+      "sent": "Abrimos o WhatsApp com a sua mensagem. Se ele não abriu, use um dos números ao lado.",
+      "msg_intro": "Olá, Arke. Gostaria de conversar sobre um projeto.",
+      "msg_labels": {
+        "name": "Nome",
+        "company": "Empresa",
+        "email": "E-mail",
+        "phone": "WhatsApp",
+        "challenge": "Desafio",
+        "timeline": "Prazo desejado",
+        "budget": "Investimento"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Desenvolvimento de software sob medida. Engenharia de software, automação e aplicações com IA.",
+    "place": "Fortaleza, Brasil",
+    "privacy": "Privacidade",
+    "rights": "Todos os direitos reservados."
+  },
+  "privacy": {
+    "slug": "privacidade",
+    "title": "Privacidade e informações legais",
+    "updated": "Atualizado em novembro de 2026.",
+    "back": "Voltar ao site",
+    "sections": [
+      {
+        "h": "O que este site coleta",
+        "p": [
+          "Este site não usa cookies, analytics nem rastreadores, e não armazena os dados digitados no formulário de contato."
+        ]
+      },
+      {
+        "h": "Formulário de contato",
+        "p": [
+          "Ao enviar o formulário, o seu navegador abre o WhatsApp com uma mensagem contendo o que você preencheu: nome, empresa, e-mail, WhatsApp, descrição do desafio, prazo e, se informada, a faixa de investimento. O envio só acontece quando você confirma a mensagem no WhatsApp.",
+          "Usamos esses dados apenas para responder ao seu contato e avaliar o projeto. Eles não são vendidos nem compartilhados para fins de publicidade."
+        ]
+      },
+      {
+        "h": "Serviços de terceiros",
+        "p": [
+          "As fontes tipográficas são carregadas do Google Fonts e a página é hospedada no GitHub Pages. Esses serviços podem registrar dados técnicos de acesso, como endereço IP, segundo as políticas deles. As conversas pelo WhatsApp seguem os termos do próprio WhatsApp."
+        ]
+      },
+      {
+        "h": "Seus direitos",
+        "p": [
+          "Você pode pedir acesso, correção ou exclusão dos dados que nos enviou, conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), escrevendo para arkeanalytica@gmail.com."
+        ]
+      }
+    ]
+  }
+}

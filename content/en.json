@@ -1,0 +1,343 @@
+{
+  "lang": "en",
+  "code": "en",
+  "other_code": "pt",
+  "other_label": "Português",
+  "meta": {
+    "title": "Arke Analytica — Custom Software Development",
+    "description": "Software engineering, automation and AI applications built around your business. From discovery to rollout.",
+    "descriptor": "Custom Software Development"
+  },
+  "nav": {
+    "solutions": "Solutions",
+    "projects": "Work",
+    "method": "How we work",
+    "cta": "Talk to Arke",
+    "menu": "Menu",
+    "skip": "Skip to content",
+    "lang_label": "Language"
+  },
+  "hero": {
+    "eyebrow": "Custom software · Engineering & Business",
+    "title": "Your business is unique. Your software should be, too.",
+    "lead": "We understand the complexity of your operations and engineer custom software built around your processes — not the other way around.",
+    "cta": "Let's discuss your project",
+    "secondary": "Explore our work",
+    "badge": "First operational release in as little as 1 week*",
+    "footnote": "*For eligible projects, following discovery and scope approval. Timelines vary by complexity, integrations and client availability.",
+    "frame_a": "Geospatial analysis · weighted layers",
+    "frame_b": "Road inspection · automated detection",
+    "alt_a": "Interface of a geospatial analysis tool showing three heat maps side by side with per-layer weight controls.",
+    "alt_b": "Filmed stretch of road with patches and cracks marked automatically by detection boxes."
+  },
+  "proof": {
+    "eyebrow": "Track record",
+    "title": "Experience that turns into working solutions.",
+    "stats": [
+      {
+        "value": "1 month → 40 min",
+        "label": "one enterprise operational cycle, after the multi-agent system"
+      },
+      {
+        "value": "6+ years",
+        "label": "of AI and machine learning in production, from public sector to enterprise"
+      },
+      {
+        "value": "2 countries",
+        "label": "engineering in Brazil and applied research in the United States"
+      },
+      {
+        "value": "Standard",
+        "label": "road inspection system adopted as the public-sector standard"
+      }
+    ],
+    "note": "Facts from projects our engineers have worked on."
+  },
+  "solutions": {
+    "eyebrow": "Solutions",
+    "title": "Software designed for the problem. Built for the operation.",
+    "lead": "We build products and systems that remove limitations, connect processes and make complex operations more efficient.",
+    "items": [
+      {
+        "icon": "grid",
+        "title": "Custom management systems",
+        "text": "Your workflows, rules and data in a single platform."
+      },
+      {
+        "icon": "window",
+        "title": "Web platforms and applications",
+        "text": "Digital products for teams, customers and partners."
+      },
+      {
+        "icon": "flow",
+        "title": "Process automation",
+        "text": "Less manual work and less rework in the routines that repeat."
+      },
+      {
+        "icon": "nodes",
+        "title": "Integrations and systems architecture",
+        "text": "Connecting the tools and data your operation already relies on."
+      },
+      {
+        "icon": "spark",
+        "title": "AI applications",
+        "text": "Automation and decision support where there is real value."
+      },
+      {
+        "icon": "bars",
+        "title": "Data and dashboards",
+        "text": "Operational visibility and indicators for management."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Selected work",
+    "title": "Solutions built for concrete challenges.",
+    "lead": "Projects delivered by the engineers on our team. Clients are not named for confidentiality reasons.",
+    "labels": {
+      "challenge": "Challenge",
+      "solution": "Solution",
+      "result": "Result"
+    },
+    "items": [
+      {
+        "segment": "Public sector",
+        "title": "AI road inspection",
+        "challenge": "Turning kilometers of road footage into an objective pavement condition report.",
+        "solution": "An ensemble of neural networks that detects potholes, cracks and patches automatically.",
+        "result": "Adopted as the road inspection standard in the public sector.",
+        "image": "inspecao-rodovias.webp",
+        "w": 1400,
+        "h": 784,
+        "alt": "Stretch of road with patches and cracks marked by automated detection boxes."
+      },
+      {
+        "segment": "Enterprise",
+        "title": "Multi-agent system",
+        "challenge": "An operational workflow that took a month per cycle.",
+        "solution": "A multi-agent system in production, running the workflow end to end.",
+        "result": "The cycle now closes in about 40 minutes.",
+        "figure": {
+          "from": "1 month",
+          "to": "40 min",
+          "caption": "per operational cycle"
+        }
+      },
+      {
+        "segment": "Research · United States",
+        "title": "Geospatial library",
+        "challenge": "Bringing urban data from different sources and geometries onto a single analysis grid.",
+        "solution": "A calibrated rasterization library with configurable weights per layer.",
+        "result": "Adopted by an urban analytics framework at a New York university.",
+        "image": "biblioteca-geoespacial.webp",
+        "w": 1600,
+        "h": 722,
+        "alt": "Geospatial analysis tool with heat maps for hotels, businesses and points of interest."
+      },
+      {
+        "segment": "Startup · Construction",
+        "title": "Construction analytics",
+        "challenge": "Anticipating schedule delays and waste generation on construction sites.",
+        "solution": "Machine learning models that integrate data from thousands of construction projects.",
+        "result": "",
+        "figure": {
+          "to": "Thousands of projects",
+          "caption": "in a single forecasting base"
+        }
+      }
+    ]
+  },
+  "segments": {
+    "eyebrow": "Industries",
+    "title": "We understand different operations. We build specific solutions.",
+    "items": [
+      {
+        "title": "Construction",
+        "text": "Sites, crews, activities and operational control."
+      },
+      {
+        "title": "E-commerce",
+        "text": "Orders, integrations, management and sales automation."
+      },
+      {
+        "title": "Healthcare",
+        "text": "Administrative processes, patient service and information, with privacy requirements in mind."
+      },
+      {
+        "title": "Education",
+        "text": "Platforms, academic management and learning workflows."
+      }
+    ]
+  },
+  "challenges": {
+    "eyebrow": "Challenges we solve",
+    "title": "When software limits the business, it is time to build differently.",
+    "items": [
+      "Off-the-shelf tools that don't fit the rules of your operation.",
+      "Processes bent to work around system limitations.",
+      "Low adoption and too much complexity for your teams.",
+      "Spreadsheets, manual tasks and fragmented data.",
+      "Recurring licenses that don't match what you need.",
+      "The need to build technology without hiring an in-house team."
+    ],
+    "closing": "The answer isn't necessarily one more tool. It is the right solution for the right process."
+  },
+  "method": {
+    "eyebrow": "Method",
+    "title": "Rigor in the process. Clarity in every delivery.",
+    "deliverables": "Deliverables",
+    "steps": [
+      {
+        "title": "Discovery and diagnosis",
+        "text": "Understanding the business, its processes, its users and the existing limitations.",
+        "out": [
+          "Current process map",
+          "Limitations and priorities"
+        ]
+      },
+      {
+        "title": "Architecture and design",
+        "text": "Proposed solution, flows, priorities and requirements.",
+        "out": [
+          "Solution design",
+          "Flows and requirements"
+        ]
+      },
+      {
+        "title": "Scope and validation",
+        "text": "Deliverables, acceptance criteria, schedule and investment.",
+        "out": [
+          "Written scope",
+          "Acceptance criteria",
+          "Schedule and investment"
+        ]
+      },
+      {
+        "title": "Engineering and testing",
+        "text": "Development, validation and milestone tracking.",
+        "out": [
+          "Releases per milestone",
+          "Validation with your team"
+        ]
+      },
+      {
+        "title": "Assisted rollout",
+        "text": "Go-live, guidance and contracted adjustments.",
+        "out": [
+          "System in operation",
+          "Team guidance"
+        ]
+      },
+      {
+        "title": "Evolution",
+        "text": "Optional maintenance and improvements after delivery.",
+        "out": [
+          "Maintenance",
+          "New features"
+        ]
+      }
+    ],
+    "speed": "On tightly scoped projects, the first release can go live 1 week after scope approval."
+  },
+  "model": {
+    "eyebrow": "Engagement model",
+    "title": "A transparent relationship. A solution built to last.",
+    "items": [
+      {
+        "title": "Custom project",
+        "text": "Scope, milestones, investment and deliverables agreed before work begins."
+      },
+      {
+        "title": "Defined ownership",
+        "text": "Usage rights, source code and intellectual property as set out in the contract."
+      },
+      {
+        "title": "No mandatory Arke license",
+        "text": "There is no Arke licensing fee to use the delivered software, when so contracted. Infrastructure, APIs and third-party services may carry their own costs."
+      },
+      {
+        "title": "Support and evolution on demand",
+        "text": "Optional maintenance, operations support and new features."
+      }
+    ],
+    "cta": "Request a project assessment"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Your company's next software starts with a conversation.",
+    "lead": "Tell us the challenge you need to solve. Our team assesses the context, the technical options and the best path for the project.",
+    "direct": "Or reach us directly",
+    "email_label": "Email",
+    "form": {
+      "name": "Name",
+      "company": "Company",
+      "email": "Email",
+      "phone": "WhatsApp",
+      "challenge": "What challenge do you need to solve?",
+      "timeline": "Desired timeline",
+      "budget": "Investment range (optional)",
+      "budget_options": [
+        "Prefer not to say",
+        "Up to BRL 20k",
+        "BRL 20k to 60k",
+        "BRL 60k to 150k",
+        "Above BRL 150k"
+      ],
+      "consent": "I agree to send this information to Arke Analytica so they can contact me about the project, as described in the",
+      "privacy": "privacy policy",
+      "submit": "Talk to Arke",
+      "hint": "Submitting opens WhatsApp with your message ready to send. Nothing is stored on this site.",
+      "error": "Please fill in the required fields and accept the privacy policy.",
+      "sent": "We opened WhatsApp with your message. If it didn't open, use one of the numbers on the side.",
+      "msg_intro": "Hello, Arke. I'd like to talk about a project.",
+      "msg_labels": {
+        "name": "Name",
+        "company": "Company",
+        "email": "Email",
+        "phone": "WhatsApp",
+        "challenge": "Challenge",
+        "timeline": "Desired timeline",
+        "budget": "Investment"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Custom software development. Software engineering, automation and AI applications.",
+    "place": "Fortaleza, Brazil",
+    "privacy": "Privacy",
+    "rights": "All rights reserved."
+  },
+  "privacy": {
+    "slug": "privacy",
+    "title": "Privacy and legal information",
+    "updated": "Updated November 2026.",
+    "back": "Back to the site",
+    "sections": [
+      {
+        "h": "What this site collects",
+        "p": [
+          "This site uses no cookies, analytics or trackers, and it does not store what you type into the contact form."
+        ]
+      },
+      {
+        "h": "Contact form",
+        "p": [
+          "When you submit the form, your browser opens WhatsApp with a message containing what you filled in: name, company, email, WhatsApp number, a description of the challenge, timeline and, if provided, the investment range. Nothing is sent until you confirm the message in WhatsApp.",
+          "We use this information only to reply to you and assess the project. It is not sold or shared for advertising."
+        ]
+      },
+      {
+        "h": "Third-party services",
+        "p": [
+          "Typefaces are loaded from Google Fonts and the page is hosted on GitHub Pages. These services may log technical access data, such as IP address, under their own policies. WhatsApp conversations are subject to WhatsApp's terms."
+        ]
+      },
+      {
+        "h": "Your rights",
+        "p": [
+          "You may request access to, correction of or deletion of the data you sent us, under Brazil's General Data Protection Law (Law No. 13,709/2018), by writing to arkeanalytica@gmail.com."
+        ]
+      }
+    ]
+  }
+}

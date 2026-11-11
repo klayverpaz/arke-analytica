@@ -1,0 +1,11 @@
+{
+  "name": "arke-site",
+  "private": true,
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0"
+  }
+}

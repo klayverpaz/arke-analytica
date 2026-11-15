@@ -1,79 +1,766 @@
 <!doctype html>
 <html lang="en">
+<!-- arke: pagina-feita-a-mao (build.py não sobrescreve; versão em inglês de pt/index.html) -->
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arke Analytica — Custom Software Development</title>
-<meta name="description" content="Software engineering, automation and AI applications built around your business. From discovery to rollout.">
+<title>Arke Analytica · Custom Software Development</title>
+<meta name="description" content="Software engineering, automation and artificial intelligence applications built around your business. Start with a 30-minute call, at no cost.">
 <link rel="canonical" href="https://klayverpaz.github.io/arke-analytica/en/">
 <link rel="alternate" hreflang="pt-BR" href="https://klayverpaz.github.io/arke-analytica/pt/">
 <link rel="alternate" hreflang="en" href="https://klayverpaz.github.io/arke-analytica/en/">
 <link rel="alternate" hreflang="x-default" href="https://klayverpaz.github.io/arke-analytica/pt/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Arke Analytica — Custom Software Development">
-<meta property="og:description" content="Software engineering, automation and AI applications built around your business. From discovery to rollout.">
+<meta property="og:title" content="Arke Analytica · Custom Software Development">
+<meta property="og:description" content="Software engineering, automation and artificial intelligence applications built around your business.">
 <meta property="og:url" content="https://klayverpaz.github.io/arke-analytica/en/">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
 <meta name="theme-color" content="#060A14">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="preload" href="../assets/fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: "Geist"; src: url(../assets/fonts/geist-400.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Geist"; src: url(../assets/fonts/geist-500.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Geist"; src: url(../assets/fonts/geist-600.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+
+/* Arke Analytica · Design System v0.2 (azul metálico, vidro canelado) */
+:root {
+  --bg-primary: #060A14;
+  --bg-surface: #0D1424;
+  --bg-elevated: #152038;
+  --brand-primary: #6C93C8;
+  --brand-strong: #397BFF;
+  --brand-link: #A9C3EA;
+  --brand-accent: #9275E8;
+  --text-primary: #F5F7FB;
+  --text-secondary: #B4BFD3;
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --glass: rgba(255, 255, 255, 0.055);
+  --glass-strong: rgba(255, 255, 255, 0.10);
+  --danger: #FF9C9C;
+  --ok: #5BD68A;
+  --ok-soft: #8FE8B0;
+  --warn: #FFC98A;
+  --radius: 22px;
+  --radius-sm: 14px;
+  --font: "Geist", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease: 220ms ease;
+  --out: cubic-bezier(.2, .7, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: #02040A; color: var(--text-primary); font-family: var(--font); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img, svg { display: block; }
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: var(--brand-link); text-decoration: none; }
+a:hover { color: var(--text-primary); }
+b, i, em { font-style: normal; font-weight: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid #9DBBFF; outline-offset: 3px; border-radius: 6px; }
+
+/* Página: tudo responde à largura da página (container), para o modo celular funcionar no computador */
+.page {
+  container: page / inline-size;
+  position: relative; background: var(--bg-primary); min-height: 100vh; overflow-x: clip;
+  --section: clamp(72px, 11cqi, 150px);
+  --gutter: clamp(16px, 3.4cqi, 44px);
+}
+
+h1, h2, h3 { font-weight: 500; letter-spacing: -0.03em; text-wrap: balance; }
+h1 { font-size: clamp(2.55rem, 6.6cqi, 5.2rem); line-height: 1.0; letter-spacing: -0.045em; font-weight: 400; }
+h2 { font-size: clamp(2rem, 4.3cqi, 3.4rem); line-height: 1.06; letter-spacing: -0.04em; font-weight: 400; }
+h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacing: -0.02em; }
+
+.container { width: 100%; max-width: calc(1280px + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
+.muted { color: var(--text-secondary); }
+.lead { color: var(--text-secondary); font-size: clamp(1.03rem, 1.4cqi, 1.17rem); max-width: 56ch; text-wrap: pretty; }
+.footnote { color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5; max-width: 62ch; }
+.icon { width: 24px; height: 24px; flex: none; }
+.icon-sm { width: 17px; height: 17px; flex: none; }
+
+.eyebrow, .tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--glass);
+  font-size: 0.82rem; font-weight: 500; color: var(--text-secondary); line-height: 1.3;
+}
+.eyebrow::before, .tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand-primary); flex: none; }
+.label { font-size: 0.76rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-secondary); }
+
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--line-strong); border-radius: var(--radius);
+  backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+.card {
+  border-radius: var(--radius); border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+}
+
+/* Fundo do topo e do contato: curvas de nível */
+.flutes { position: absolute; inset: 0; overflow: hidden; background: #060A14; pointer-events: none; z-index: -1; }
+.flutes::before, .flutes::after { content: ""; position: absolute; inset: 0; }
+.topo { display: none; position: absolute; left: -4%; top: -4%; width: 108%; height: 108%; }
+.section-contact .flutes { -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent); mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent); }
+
+/* C: curvas de nível finas, como um mapa de engenharia */
+.page[data-bg="c"] .flutes { background: #070B18; }
+.page[data-bg="c"] .flutes::before {
+  background:
+    radial-gradient(45% 50% at 74% 40%, rgba(57,123,255,.26), transparent 70%),
+    radial-gradient(30% 30% at 95% 90%, rgba(146,117,232,.16), transparent 70%);
+}
+.page[data-bg="c"] .topo { display: block; animation: topo 40s ease-in-out infinite alternate;
+  -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 60%), linear-gradient(180deg, #000 60%, transparent 98%);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 8%, #000 60%), linear-gradient(180deg, #000 60%, transparent 98%); mask-composite: intersect; }
+.topo path { fill: none; stroke: rgba(169,195,234,.13); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.topo path.m { stroke: rgba(169,195,234,.28); }
+.page[data-bg="c"] .flutes::after { background: linear-gradient(90deg, rgba(7,11,24,.7) 0%, rgba(7,11,24,0) 50%); }
+@keyframes topo { from { transform: translate3d(0, 0, 0) rotate(0deg); } to { transform: translate3d(-2%, 1.5%, 0) rotate(1.5deg); } }
+
+/* Botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 52px; padding: 0 24px; border: 1px solid transparent; border-radius: 999px;
+  font-weight: 500; font-size: 0.98rem; cursor: pointer; white-space: nowrap;
+  transition: background var(--ease), border-color var(--ease), color var(--ease), transform var(--ease);
+}
+.btn-sm { min-height: 42px; padding: 0 18px; font-size: 0.9rem; }
+.btn-primary { background: var(--text-primary); color: #0A1230; }
+.btn-primary:hover { background: #fff; color: #0A1230; transform: translateY(-1px); }
+.btn-ghost { color: var(--text-primary); border-color: var(--line-strong); background: var(--glass); }
+.btn-ghost:hover { background: var(--glass-strong); color: var(--text-primary); }
+.btn-text { color: var(--text-primary); padding: 0 6px; }
+.btn-text:hover { color: var(--brand-link); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+
+/* Cabeçalho */
+.site-header { position: sticky; top: 0; z-index: 40; height: 68px; margin-bottom: -68px; transition: background var(--ease), border-color var(--ease); border-bottom: 1px solid transparent; }
+.site-header.is-scrolled { background: rgba(6, 10, 20, 0.78); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border-bottom-color: var(--line); }
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 100%; }
+.wordmark { display: inline-flex; gap: 0.4em; font-weight: 600; font-size: 0.92rem; letter-spacing: 0.16em; color: var(--text-primary); white-space: nowrap; }
+.wordmark-b { color: #BFD2F0; font-weight: 400; }
+.nav-pill { display: none; }
+.header-end { display: flex; align-items: center; gap: 10px; }
+.header-end .btn-primary { display: none; }
+.menu-toggle { display: inline-flex; align-items: center; background: rgba(255,255,255,.10); border: 1px solid var(--line); min-height: 42px; padding: 0 18px; border-radius: 999px; cursor: pointer; font-size: 0.92rem; font-weight: 500; }
+.menu-panel { display: none; position: absolute; left: var(--gutter); right: var(--gutter); top: 64px; padding: 10px; flex-direction: column; background: rgba(10, 16, 34, 0.96); border: 1px solid var(--line-strong); border-radius: var(--radius); backdrop-filter: blur(22px); }
+.menu-panel.is-open { display: flex; }
+.menu-panel a { color: var(--text-primary); padding: 13px 14px; font-size: 1.02rem; border-radius: 12px; }
+.menu-panel a:hover { background: var(--glass); }
+.menu-panel .btn { margin-top: 8px; }
+
+.lang { display: inline-flex; padding: 3px; border-radius: 999px; background: rgba(255,255,255,.10); border: 1px solid var(--line); }
+.lang a { color: var(--text-secondary); font-size: .8rem; font-weight: 500; padding: 6px 10px; border-radius: 999px; }
+.lang a[aria-current] { color: #0A1230; background: var(--text-primary); }
+
+/* Topo */
+.hero { position: relative; isolation: isolate; overflow: hidden; }
+.hero-inner { display: grid; gap: 36px; padding-top: 104px; padding-bottom: 28px; }
+.hero-copy .eyebrow { margin-bottom: 22px; background: rgba(255,255,255,.08); color: rgba(245,247,251,.86); }
+.hero h1 span { display: inline-block; }
+.hero .lead { margin-top: 20px; color: rgba(245, 247, 251, 0.86); max-width: 50ch; }
+.hero .actions { margin-top: 30px; }
+.hero .actions .btn-primary { flex: 1 1 100%; }
+.hero-note { margin-top: 14px; font-size: 0.86rem; color: rgba(245, 247, 251, 0.72); display: flex; align-items: center; gap: 8px; }
+.hero-note::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(91,214,138,.15); }
+
+/* Faixa de empresas */
+.clients { display: grid; gap: 14px; margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--line-strong); }
+.clients-label { font-size: 0.82rem; font-weight: 500; color: rgba(245, 247, 251, 0.72); }
+.marquee { position: relative; display: flex; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-track { display: flex; flex: none; gap: clamp(44px, 7cqi, 96px); padding-right: clamp(44px, 7cqi, 96px); animation: marquee 30s linear infinite; }
+.marquee-track li { display: inline-flex; align-items: center; gap: .5em; flex: none; font-size: clamp(1.05rem, 1.6cqi, 1.35rem); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(245, 247, 251, .78); white-space: nowrap; }
+@keyframes marquee { to { transform: translateX(-100%); } }
+
+/* Seções */
+.section { position: relative; padding: var(--section) 0; }
+.section-head { max-width: 860px; margin-bottom: clamp(32px, 5cqi, 64px); }
+.section-head .eyebrow { margin-bottom: 20px; }
+.section-head .lead { margin-top: 20px; }
+
+/* Cenas animadas: base comum */
+.scene {
+  container-type: inline-size; position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--line);
+  background: radial-gradient(110% 80% at 100% 0%, rgba(57, 123, 255, 0.20), transparent 60%), linear-gradient(160deg, #101a36, #0a1230);
+  isolation: isolate;
+}
+.stage { position: absolute; inset: 0; font-size: var(--fs, clamp(8.5px, 2.7cqi, 15px)); line-height: 1.35; transition: opacity .6s ease; }
+.scene.is-out .stage { opacity: 0; }
+.scene.no-anim *, .scene.no-anim *::before, .scene.no-anim *::after { transition: none !important; }
+.live { display: inline-flex; align-items: center; gap: .45em; font-size: .82em; color: var(--ok-soft); white-space: nowrap; }
+.live i { width: .55em; height: .55em; border-radius: 50%; background: var(--ok); animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(91,214,138,.6); } 100% { box-shadow: 0 0 0 .6em rgba(91,214,138,0); } }
+.check { display: inline-grid; place-items: center; width: 1.35em; height: 1.35em; border-radius: 50%; background: rgba(91,214,138,.16); color: var(--ok); flex: none; }
+.check svg { width: .85em; height: .85em; }
+
+/* Vitrine do topo: alterna as cinco animações dos projetos */
+.showcase { display: grid; gap: 12px; padding: 12px; }
+.sh-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 4px 6px 0; }
+.sh-count { font-size: .86rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.sh-count b { color: var(--text-primary); font-weight: 500; }
+.sh-stage { position: relative; aspect-ratio: 4 / 5; }
+.sh-stage .scene { position: absolute; inset: 0; border-radius: 14px; opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility 0s linear .6s; }
+.sh-stage .scene.is-active { opacity: 1; visibility: visible; transition: opacity .6s ease, visibility 0s; }
+.sh-bottom { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; padding: 2px 6px 0; }
+.sh-title { font-size: 1.08rem; font-weight: 500; letter-spacing: -.02em; line-height: 1.3; }
+.sh-link { display: inline-flex; align-items: center; gap: 6px; font-size: .88rem; white-space: nowrap; }
+.sh-bars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; padding: 0 6px 4px; }
+.sh-bars button { height: 18px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; }
+.sh-bars button i { position: relative; display: block; width: 100%; height: 3px; border-radius: 99px; background: var(--line-strong); overflow: hidden; }
+.sh-bars button i::after { content: ""; position: absolute; inset: 0; border-radius: 99px; background: var(--text-primary); transform: scaleX(var(--p, 0)); transform-origin: left; transition: transform var(--t, 0s) linear; }
+.sh-bars button:hover i { background: rgba(255,255,255,.3); }
+.sh-stage .mo-crm .stage { --fs: clamp(8px, 2.25cqi, 12.5px); }
+
+/* Bandeiras */
+.flag { height: .72em; width: auto; border-radius: 2px; flex: none; box-shadow: 0 0 0 1px rgba(255,255,255,.12); }
+.stat .flags { display: flex; gap: 10px; margin-top: 12px; }
+.stat .flags .flag { height: 22px; border-radius: 3px; }
+.marquee-track .city { text-transform: none; letter-spacing: .02em; font-weight: 400; color: rgba(245,247,251,.6); }
+
+/* Números */
+.stats { display: grid; grid-template-columns: 1fr; border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)); }
+.stat { padding: 26px 24px; }
+.stat + .stat { border-top: 1px solid var(--line); }
+.stat dt { font-size: clamp(1.9rem, 2.9cqi, 2.5rem); font-weight: 400; letter-spacing: -.04em; line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap; display: flex; align-items: center; gap: .3em; }
+.stat dt .from { color: var(--text-secondary); position: relative; }
+.stat dt .from::after { content: ""; position: absolute; left: -2%; right: -2%; top: 55%; height: 2px; background: var(--text-secondary); transform: scaleX(0); transform-origin: left; transition: transform .6s ease .2s; }
+.stats.s1 .stat dt .from::after { transform: scaleX(1); }
+.stat dt .arrow { width: .7em; height: .7em; color: var(--text-secondary); }
+@container page (min-width: 1040px) { .stat dt { font-size: clamp(1.7rem, 2.2cqi, 2.2rem); gap: .25em; } }
+.stat dd { margin-top: 12px; color: var(--text-secondary); font-size: .94rem; line-height: 1.5; }
+.stats-note { margin-top: 16px; }
+
+/* Soluções */
+.solutions { display: grid; gap: 14px; }
+.solution { display: grid; gap: 24px; padding: 14px 14px 26px; }
+.solution .scene { aspect-ratio: 16 / 11; }
+.solution-head { padding: 0 10px; }
+.solution-head h3 { font-size: clamp(1.3rem, 2cqi, 1.6rem); margin-bottom: 10px; }
+.solution-head p { color: var(--text-secondary); max-width: 46ch; }
+.solution-list { display: grid; grid-template-columns: 1fr; gap: 0 28px; margin-top: 16px; padding: 0 10px; }
+.solution-list li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .98rem; }
+.solution-list li .icon-sm { color: var(--brand-link); }
+
+/* Cena: um sistema se monta */
+.sc-build .stage { padding: 6%; }
+.win { height: 100%; display: flex; flex-direction: column; border-radius: .9em; border: 1px solid var(--line-strong); background: rgba(6,10,20,.55); overflow: hidden; opacity: 0; transform: translateY(.8em); transition: opacity .5s ease, transform .6s var(--out); }
+.sc-build.s1 .win { opacity: 1; transform: none; }
+.win-bar { display: flex; align-items: center; gap: .4em; padding: .55em .8em; border-bottom: 1px solid var(--line); font-size: .82em; color: var(--text-secondary); }
+.win-bar i { width: .6em; height: .6em; border-radius: 50%; background: rgba(255,255,255,.18); }
+.win-bar span { margin-left: .6em; }
+.win-body { flex: 1; display: grid; grid-template-columns: 22% 1fr; min-height: 0; }
+.win-side { display: grid; align-content: start; gap: .7em; padding: .9em .8em; border-right: 1px solid var(--line); background: rgba(255,255,255,.03); transform: translateX(-100%); transition: transform .6s var(--out) .15s; }
+.sc-build.s1 .win-side { transform: none; }
+.win-side b { height: 1.3em; width: 1.3em; border-radius: .35em; background: linear-gradient(135deg, var(--brand-strong), var(--brand-accent)); margin-bottom: .4em; }
+.win-side i { height: .55em; border-radius: 99px; background: rgba(255,255,255,.12); }
+.win-side i:nth-of-type(1) { background: rgba(169,195,234,.45); }
+.win-main { padding: .9em 1em; display: grid; align-content: start; gap: .55em; min-width: 0; }
+.win-title { font-weight: 500; font-size: 1.05em; opacity: 0; transition: opacity .4s ease; display: flex; justify-content: space-between; gap: 1em; }
+.win-title small { color: var(--text-secondary); font-weight: 400; font-size: .85em; }
+.sc-build.s2 .win-title { opacity: 1; }
+.win-rows li { display: flex; align-items: center; justify-content: space-between; gap: .8em; padding: .5em .7em; border-radius: .55em; background: rgba(255,255,255,.05); font-size: .9em; opacity: 0; transform: translateX(1em); transition: opacity .4s ease, transform .5s var(--out); margin-bottom: .45em; }
+.win-rows li span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win-rows em { flex: none; font-size: .82em; padding: .15em .65em; border-radius: 99px; background: rgba(255,255,255,.08); color: var(--text-secondary); transition: background .4s ease, color .4s ease; }
+.sc-build.s3 .r1, .sc-build.s4 .r2, .sc-build.s5 .r3, .sc-build.s6 .r4 { opacity: 1; transform: none; }
+.sc-build.s7 .win-rows em.ok { background: rgba(91,214,138,.14); color: var(--ok-soft); }
+.sc-build.s7 .win-rows em.at { background: rgba(255,201,138,.14); color: var(--warn); }
+.sc-build.s7 .win-rows em.lo { background: rgba(169,195,234,.14); color: var(--brand-link); }
+
+/* Cena: rotinas que se resolvem sozinhas */
+.sc-tasks .stage { padding: 7% 7%; display: flex; flex-direction: column; gap: 1em; }
+.tk-head { display: flex; align-items: center; justify-content: space-between; gap: 1em; }
+.tk-head b { font-weight: 500; font-size: 1.08em; }
+.tk-chip { display: grid; font-size: .82em; padding: .3em .85em; border-radius: 99px; border: 1px solid rgba(169,195,234,.35); background: rgba(57,123,255,.12); white-space: nowrap; }
+.tk-chip span { grid-area: 1 / 1; transition: opacity .4s ease; }
+.tk-chip .d { opacity: 0; color: var(--ok-soft); }
+.sc-tasks.s6 .tk-chip { border-color: rgba(91,214,138,.4); background: rgba(91,214,138,.12); }
+.sc-tasks.s6 .tk-chip .w { opacity: 0; }
+.sc-tasks.s6 .tk-chip .d { opacity: 1; }
+.tk-list { display: grid; gap: .55em; }
+.tk-list li { display: flex; align-items: center; gap: .8em; padding: .7em .85em; border-radius: .7em; border: 1px solid var(--line); background: rgba(255,255,255,.04); transition: background .4s ease, border-color .4s ease; }
+.tk-list li span { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .4s ease; }
+.tk-list li small { font-size: .8em; color: var(--ok-soft); opacity: 0; transition: opacity .4s ease; }
+.st { position: relative; width: 1.35em; height: 1.35em; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.28); flex: none; transition: border-color .3s ease, background .3s ease; }
+.st::after { content: ""; position: absolute; inset: 22% 18% 30% 22%; border: solid var(--ok); border-width: 0 0 .16em .16em; transform: rotate(-45deg) scale(0); transition: transform .35s var(--out); }
+.tk-list li.work { border-color: rgba(169,195,234,.45); background: rgba(57,123,255,.10); }
+.tk-list li.work .st { border-color: rgba(157,187,255,.25); border-top-color: #9DBBFF; animation: spin .8s linear infinite; }
+.tk-list li.done span { color: var(--text-secondary); }
+.tk-list li.done small { opacity: 1; }
+.tk-list li.done .st { animation: none; border-color: transparent; background: rgba(91,214,138,.16); }
+.tk-list li.done .st::after { transform: rotate(-45deg) scale(1); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Cena: sistemas que se ligam a um painel */
+.cn-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cn-lines path { fill: none; stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+.cn-lines .base { stroke: rgba(169,195,234,.45); stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .6s ease; }
+.cn-lines .flow { stroke: #CFE0FF; stroke-width: 2.5px; stroke-dasharray: .02 .08; opacity: 0; transition: opacity .4s ease; }
+.sc-connect.s2 .l1, .sc-connect.s3 .l2, .sc-connect.s4 .l3 { stroke-dashoffset: 0; }
+.sc-connect.s6 .flow { opacity: 1; animation: flow 1.4s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -.1; } }
+.cn-src { position: absolute; left: 5%; top: 0; bottom: 0; width: 27%; }
+.cn-src li { position: absolute; left: 0; right: 0; transform: translateY(-50%) translateX(-.8em); display: flex; align-items: center; gap: .5em; padding: .55em .7em; border-radius: .7em; border: 1px solid var(--line-strong); background: #16203a; font-size: .9em; opacity: 0; transition: opacity .4s ease, transform .5s var(--out); white-space: nowrap; }
+.cn-src li i { width: .55em; height: .55em; border-radius: 50%; background: var(--c); flex: none; }
+.cn-src .c1 { top: 20%; --c: #9DBBFF; } .cn-src .c2 { top: 50%; --c: var(--brand-accent); } .cn-src .c3 { top: 80%; --c: var(--warn); }
+.sc-connect.s1 .cn-src li { opacity: 1; transform: translateY(-50%); }
+.cn-dash { position: absolute; left: 62%; right: 5%; top: 14%; bottom: 14%; display: flex; flex-direction: column; gap: .7em; padding: .9em; border-radius: .9em; border: 1px solid var(--line-strong); background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.035)); }
+.cn-dash > b { font-weight: 500; font-size: .95em; }
+.cn-bars { flex: 1; display: flex; align-items: flex-end; gap: 9%; padding-top: .4em; border-bottom: 1px solid var(--line); }
+.cn-bars i { flex: 1; height: var(--h); border-radius: .3em .3em 0 0; background: linear-gradient(180deg, #9DBBFF, rgba(57,123,255,.4)); transform: scaleY(0); transform-origin: bottom; transition: transform .6s var(--out); transition-delay: calc(var(--i) * 90ms); }
+.sc-connect.s5 .cn-bars i { transform: none; }
+.cn-dash .live { opacity: 0; transition: opacity .4s ease; }
+.sc-connect.s6 .cn-dash .live { opacity: 1; }
+
+/* Projetos: carrossel */
+.carousel-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; border-radius: var(--radius); }
+.carousel-track::-webkit-scrollbar { display: none; }
+.case { flex: 0 0 100%; scroll-snap-align: start; display: grid; grid-template-columns: 1fr; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)); }
+.case-media { padding: 10px; }
+.case-media .scene { aspect-ratio: 4 / 5; border-radius: 14px; }
+.case-body { padding: 18px 22px 28px; display: flex; flex-direction: column; align-items: flex-start; }
+.case-body h3 { margin: 14px 0 18px; font-size: clamp(1.4rem, 2.1cqi, 1.8rem); }
+.case-body dl { display: grid; gap: 14px; }
+.case-body dt { font-size: .76rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 2px; }
+.case-body dd { font-size: .98rem; line-height: 1.55; }
+.case-body dd.result { font-size: 1.06rem; color: #fff; }
+.carousel-controls { display: flex; align-items: center; gap: 16px; margin-top: 20px; }
+.carousel-dots { display: flex; gap: 6px; }
+.carousel-dot { width: 18px; height: 4px; padding: 0; border: 0; border-radius: 99px; background: var(--line-strong); cursor: pointer; transition: background var(--ease), width var(--ease); }
+.carousel-dot[aria-current="true"] { width: 32px; background: var(--text-primary); }
+.carousel-count { margin-left: auto; font-size: .86rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.carousel-count b { color: var(--text-primary); font-weight: 500; }
+.carousel-arrows { display: flex; gap: 8px; }
+.carousel-btn { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--glass); cursor: pointer; transition: background var(--ease); }
+.carousel-btn:hover:not(:disabled) { background: var(--glass-strong); }
+.carousel-btn:disabled { opacity: .35; cursor: default; }
+.flip { transform: scaleX(-1); }
+
+/* Cena: painel de vendas com assistente no WhatsApp */
+.mo-crm .stage { display: grid; grid-template-rows: auto 1fr; gap: 1em; padding: 1.2em; --fs: clamp(9px, 3.1cqi, 13px); }
+.crm-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8em; }
+.crm-col { display: grid; gap: .6em; align-content: start; padding: .7em; border-radius: .9em; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+.crm-col-h { font-size: .9em; font-weight: 500; color: var(--text-secondary); padding: .1em .2em .3em; }
+.crm-card, .crm-slot { position: relative; display: grid; align-content: center; gap: .2em; padding: 0 .7em; border-radius: .7em; height: 4.4em; min-width: 0; }
+.crm-slot > .crm-card { position: absolute; inset: -1px; }
+.crm-card { background: rgba(255,255,255,.08); border: 1px solid var(--line); }
+.crm-card b { font-weight: 500; font-size: .94em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.crm-card span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: .4em; font-size: .8em; color: var(--text-secondary); }
+.crm-slot { border: 1px dashed var(--line-strong); }
+.crm-card.is-hot { z-index: 2; border-color: rgba(169,195,234,.55); background: #1b2950; box-shadow: 0 .8em 2em rgba(0,0,0,.35); transition: transform 1s cubic-bezier(.65,0,.35,1), background .4s ease; }
+.mo-crm.s5 .crm-card.is-hot { transform: translateX(calc(100% + 2.2em)); }
+.mo-crm.s5 .crm-card.is-hot span { color: var(--ok-soft); }
+.crm-card.is-done span { color: var(--ok-soft); }
+.crm-card.is-paid span i { width: .6em; height: .6em; border-radius: 50%; background: var(--ok); animation: pulse 2s ease-out infinite; }
+.crm-chat { display: flex; flex-direction: column; gap: .55em; padding: .9em; border-radius: .9em; background: rgba(6,10,20,.55); border: 1px solid var(--line); min-height: 0; }
+.crm-chat-h { display: flex; align-items: center; gap: .6em; padding-bottom: .7em; border-bottom: 1px solid var(--line); }
+.crm-chat-h b { display: block; font-weight: 500; }
+.crm-chat-h small { font-size: .82em; color: var(--ok); }
+.crm-avatar { display: grid; place-items: center; width: 2.2em; height: 2.2em; border-radius: 50%; background: var(--brand-strong); flex: none; }
+.crm-avatar svg { width: 1.2em; height: 1.2em; }
+.crm-msg { max-width: 88%; padding: .55em .8em; border-radius: .9em .9em .9em .25em; background: rgba(255,255,255,.09); font-size: .92em; opacity: 0; transform: translateY(.6em); transition: opacity .4s ease, transform .5s var(--out); }
+.crm-msg.out { align-self: flex-end; border-radius: .9em .9em .25em .9em; background: #1d4fbf; }
+.crm-msg.tagm { align-self: stretch; max-width: none; text-align: center; border-radius: 99px; background: rgba(91,214,138,.14); color: var(--ok-soft); border: 1px solid rgba(91,214,138,.35); font-size: .84em; }
+.mo-crm.s1 .m1, .mo-crm.s2 .m2, .mo-crm.s3 .m3, .mo-crm.s4 .m4 { opacity: 1; transform: none; }
+
+/* Cena: cronograma da obra */
+.mo-gantt .stage { display: flex; flex-direction: column; gap: 1.4em; padding: 1.8em 1.6em 2em; --fs: clamp(9px, 3cqi, 13.5px); }
+.g-head { display: flex; align-items: center; justify-content: space-between; gap: 1em; font-weight: 500; font-size: 1.05em; flex-wrap: wrap; }
+.g-chip { padding: .35em .85em; border-radius: 99px; font-size: .84em; color: var(--warn); background: rgba(255,170,80,.12); border: 1px solid rgba(255,170,80,.4); opacity: 0; transform: translateY(-.3em); transition: opacity .4s ease, transform .4s ease; }
+.mo-gantt.s2 .g-chip { opacity: 1; transform: none; }
+.g-body { flex: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1em; }
+.g-labels, .g-bars { display: grid; grid-auto-rows: 1fr; gap: .7em; height: 100%; }
+.g-labels li { display: flex; align-items: center; color: var(--text-secondary); font-size: .95em; white-space: nowrap; transition: color .4s ease; }
+.mo-gantt.s3 .g-labels li.late { color: var(--warn); }
+.g-track { position: relative; background: repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 1px, transparent 1px calc(100% / 8)); border-left: 1px solid var(--line-strong); }
+.g-bars { position: absolute; inset: 0; }
+.g-bars li { position: relative; }
+.g-bars i { position: absolute; top: 18%; bottom: 18%; left: var(--s); width: var(--w); border-radius: .5em; }
+.g-base i { background: rgba(169,195,234,.16); border: 1px solid rgba(169,195,234,.25); }
+.g-done { clip-path: inset(0 98% 0 0); transition: clip-path 3.2s linear; }
+.mo-gantt.s1 .g-done { clip-path: inset(0 36% 0 0); }
+.g-done i { background: linear-gradient(90deg, var(--brand-strong), var(--brand-primary)); }
+.g-bars i.late { transition: transform .9s cubic-bezier(.65,0,.35,1), background .5s ease, border-color .5s ease; }
+.mo-gantt.s2 .g-bars i.late { transform: translateX(28%); }
+.mo-gantt.s2 .g-base i.late { background: rgba(255,170,80,.16); border-color: rgba(255,170,80,.6); }
+.g-today { position: absolute; top: -.4em; bottom: -.4em; left: 2%; width: 2px; background: var(--text-primary); box-shadow: 0 0 1em rgba(169,195,234,.8); transition: left 3.2s linear; }
+.mo-gantt.s1 .g-today { left: 64%; }
+.g-today b { position: absolute; bottom: 100%; left: 50%; transform: translate(-50%, -.3em); padding: .15em .55em; border-radius: 99px; background: var(--text-primary); color: #0A1230; font-size: .78em; font-weight: 600; white-space: nowrap; }
+
+/* Cena: um mês vira 40 minutos */
+.mo-month .stage { display: grid; grid-template-rows: 1fr 1fr; gap: 1em; padding: 1.2em; --fs: clamp(9.5px, 3.2cqi, 14px); }
+.mm-box { display: flex; flex-direction: column; gap: .7em; padding: 1em; border-radius: .9em; border: 1px solid var(--line); background: rgba(255,255,255,.04); transition: opacity .8s ease; min-height: 0; }
+.mm-box header { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; }
+.mm-box header small { color: var(--text-secondary); font-size: .85em; }
+.mm-box header b { font-weight: 500; font-size: 1.05em; }
+.mm-cal { flex: 1; display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 1fr; gap: .3em; }
+.mm-cal i { display: flex; align-items: flex-start; justify-content: flex-end; padding: .15em .3em; font-size: .7em; color: rgba(245,247,251,.45); font-variant-numeric: tabular-nums; border-radius: .3em; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.04); transition: background .3s ease; transition-delay: calc(var(--i) * 75ms); }
+.mo-month.s1 .mm-cal i { background: rgba(169,195,234,.30); }
+.mm-cal i.x { visibility: hidden; }
+.mo-month.s5 .mm-before { opacity: .45; }
+.mm-after { flex-direction: row; align-items: center; gap: 1.2em; border-color: rgba(169,195,234,.3); background: radial-gradient(90% 120% at 0% 50%, rgba(57,123,255,.18), transparent 70%), rgba(255,255,255,.04); }
+.mm-ring { position: relative; height: 100%; aspect-ratio: 1; max-height: 10em; flex: none; }
+.mm-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.mm-ring circle { fill: none; stroke-width: 7; }
+.mm-ring .bg { stroke: rgba(255,255,255,.08); }
+.mm-ring .fg { stroke: url(#mmg); stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2s cubic-bezier(.3,.1,.3,1); }
+.mo-month.s3 .mm-ring .fg { stroke-dashoffset: 0; }
+.mm-ring p { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; line-height: 1; }
+.mm-ring p b { font-size: 2.6em; font-weight: 400; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.mm-ring p small { color: var(--text-secondary); font-size: .9em; margin-top: .2em; }
+.mm-after-txt { display: grid; gap: .3em; }
+.mm-after-txt small { color: var(--text-secondary); font-size: .85em; }
+.mm-after-txt b { font-weight: 500; font-size: 1.15em; }
+.mm-after-txt .live { opacity: 0; transition: opacity .4s ease; margin-top: .3em; }
+.mo-month.s4 .mm-after-txt .live { opacity: 1; }
+
+/* Cena: inspeção de rodovias vista de cima */
+.mo-road { background: #0b1324; }
+.mo-road .stage, .mo-map .stage { --fs: clamp(10px, 3.3cqi, 13.5px); }
+.rd-area { position: absolute; left: 0; right: 0; top: 0; height: 62%; overflow: hidden; background:
+  radial-gradient(60% 80% at 50% 50%, rgba(57,123,255,.10), transparent 70%),
+  repeating-linear-gradient(115deg, rgba(255,255,255,.015) 0 6px, transparent 6px 14px), #0c1528; }
+.rd-strip { position: absolute; left: 24%; right: 24%; top: 0; bottom: 0; overflow: hidden; background: #262c39; box-shadow: inset 3px 0 0 rgba(245,247,251,.55), inset -3px 0 0 rgba(245,247,251,.55), 0 0 40px rgba(0,0,0,.5); }
+.rd-layer { position: absolute; left: 0; right: 0; top: 0; height: 200%; transition: transform 7s linear;
+  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.03) 0 1px, transparent 2px) 0 0 / 9px 11px, radial-gradient(circle at 70% 60%, rgba(0,0,0,.18) 0 1px, transparent 2px) 0 0 / 7px 9px; }
+.mo-road.s1 .rd-layer { transform: translateY(-50%); }
+.rd-layer::before { content: ""; position: absolute; left: calc(50% - 2px); width: 4px; top: 0; bottom: 0; background: repeating-linear-gradient(180deg, rgba(255,214,120,.75) 0 3.2%, transparent 3.2% 6.5%); }
+.def { position: absolute; }
+.def .shape { position: absolute; inset: 0; }
+.d1 { top: 55%; left: 14%; width: 22%; height: 4%; }
+.d1 .shape { border-radius: 50%; background: radial-gradient(closest-side, #0a0d14 0 55%, #151a24 75%, rgba(21,26,36,0) 100%); }
+.d2 { top: 66.5%; left: 56%; width: 30%; height: 4.6%; }
+.d3 { top: 77.5%; left: 10%; width: 32%; height: 5%; }
+.d3 .shape { border-radius: 3px; background: #1d2230; box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); }
+.d4 { top: 88%; left: 54%; width: 26%; height: 4.6%; }
+.def svg.shape { width: 100%; height: 100%; }
+.def svg path { fill: none; stroke: #0b0e15; stroke-width: 2.4px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.box { position: absolute; inset: -18% -10%; border: 1.5px solid var(--warn); border-radius: 4px; box-shadow: 0 0 .8em rgba(255,201,138,.35); opacity: 0; transform: scale(1.25); transition: opacity .25s ease, transform .35s var(--out); }
+.box b { position: absolute; bottom: 100%; left: -1.5px; margin-bottom: 3px; padding: .1em .5em; border-radius: 3px; background: var(--warn); color: #241503; font-size: .78em; font-weight: 600; white-space: nowrap; }
+.mo-road.s2 .d1 .box, .mo-road.s3 .d2 .box, .mo-road.s4 .d3 .box, .mo-road.s5 .d4 .box { opacity: 1; transform: none; }
+.rd-scan { position: absolute; left: 0; right: 0; top: 85%; height: 2px; background: linear-gradient(90deg, transparent, #9DBBFF 20%, #CFE0FF 50%, #9DBBFF 80%, transparent); box-shadow: 0 0 1.2em rgba(157,187,255,.9); }
+.rd-scan b { position: absolute; left: 4%; top: -.9em; transform: translateY(-100%); padding: .2em .6em; border-radius: 99px; border: 1px solid rgba(157,187,255,.5); background: rgba(6,10,20,.75); font-size: .78em; font-weight: 500; color: #CFE0FF; white-space: nowrap; }
+.rd-report { position: absolute; left: 4%; right: 4%; bottom: 4%; top: 66%; display: flex; flex-direction: column; gap: .5em; padding: .9em 1em; border-radius: .9em; border: 1px solid var(--line-strong); background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.035)); }
+.rd-report header { display: flex; justify-content: space-between; align-items: center; gap: .3em 1em; flex-wrap: wrap; }
+.rd-report header b { font-weight: 500; }
+.rd-stat { display: grid; grid-template-columns: 1fr 1fr; gap: .3em 1.2em; }
+.rd-stat p { display: flex; justify-content: space-between; gap: .5em; padding: .3em 0; border-bottom: 1px solid var(--line); font-size: .92em; color: var(--text-secondary); }
+.rd-stat p b { color: var(--text-primary); font-weight: 500; font-variant-numeric: tabular-nums; }
+.rd-stat p.km { grid-column: 1 / -1; }
+.rd-state { display: grid; font-size: .82em; }
+.rd-state span { grid-area: 1 / 1; transition: opacity .4s ease; white-space: nowrap; }
+.rd-state .w { color: #CFE0FF; }
+.rd-state .d { color: var(--ok-soft); opacity: 0; }
+.mo-road.s6 .rd-state .w { opacity: 0; }
+.mo-road.s6 .rd-state .d { opacity: 1; }
+
+/* Cena: mapa da cidade em grade de calor */
+.mo-map { background: #0b1428; }
+.mp-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mp-river { fill: none; stroke: #13284f; stroke-width: 9; stroke-linecap: round; }
+.mp-st { stroke: rgba(169,195,234,.16); stroke-width: 1px; vector-effect: non-scaling-stroke; opacity: 0; transition: opacity .8s ease; }
+.mp-st.av { stroke: rgba(169,195,234,.32); stroke-width: 1.6px; }
+.mo-map.s1 .mp-st { opacity: 1; }
+.mp-pt { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0); transition: opacity .3s ease, transform .4s var(--out); transition-delay: calc(var(--i) * 25ms); }
+.mo-map.s2 .mp-pt.h, .mo-map.s3 .mp-pt.c { opacity: 1; transform: none; }
+.mo-map.s4 .mp-pt { opacity: .3 !important; transition-delay: 0s; }
+.mp-heat rect { opacity: 0; transition: opacity .5s ease; transition-delay: calc(var(--d) * 28ms); }
+.mo-map.s4 .mp-heat rect { opacity: var(--o); }
+.mp-heat { transition: opacity 1.2s ease; }
+.mp-heat.b { opacity: 0; }
+.mo-map.s5 .mp-heat.a { opacity: 0; }
+.mo-map.s5 .mp-heat.b { opacity: 1; }
+.mp-panel { position: absolute; left: 4%; right: 4%; bottom: 4%; display: grid; gap: .55em; padding: .85em 1em; border-radius: .9em; border: 1px solid var(--line-strong); background: rgba(10,16,34,.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.mp-panel > b { font-weight: 500; font-size: .95em; display: flex; justify-content: space-between; }
+.mp-row { display: grid; grid-template-columns: 11em 1fr; align-items: center; gap: .8em; font-size: .86em; color: var(--text-secondary); }
+.mp-row i.dot { display: inline-block; width: .6em; height: .6em; border-radius: 50%; background: var(--c); margin-right: .45em; }
+.mp-track { position: relative; height: .3em; border-radius: 99px; background: rgba(255,255,255,.12); }
+.mp-track::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--a); border-radius: 99px; background: rgba(157,187,255,.6); transition: width 1.2s ease; }
+.mp-track::after { content: ""; position: absolute; top: 50%; left: var(--a); width: 1em; height: 1em; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); box-shadow: 0 0 0 .25em rgba(157,187,255,.25); transition: left 1.2s ease; }
+.mo-map.s5 .mp-track { --a: var(--b); }
+.mp-legend { display: flex; align-items: center; gap: .6em; font-size: .78em; color: var(--text-secondary); opacity: 0; transition: opacity .5s ease; }
+.mp-legend i { flex: 1; height: .45em; border-radius: 99px; background: linear-gradient(90deg, rgba(29,63,143,.6), #397BFF, #9275E8, #E7ECFA); }
+.mo-map.s6 .mp-legend { opacity: 1; }
+
+/* Desafios */
+.split { display: grid; gap: 32px; }
+.checklist li { display: flex; gap: 14px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 1.04rem; }
+.checklist li:first-child { border-top: 1px solid var(--line); }
+.checklist .icon-sm { color: #BFD2F0; margin-top: 5px; }
+.closing { margin-top: 32px; font-size: clamp(1.3rem, 2cqi, 1.7rem); line-height: 1.3; font-weight: 400; letter-spacing: -.03em; text-wrap: balance; }
+
+/* Diagnóstico */
+.section-diag { overflow: hidden; }
+.section-diag::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 80% 30%, rgba(57,123,255,.14), transparent 70%), radial-gradient(50% 40% at 10% 90%, rgba(146,117,232,.10), transparent 70%); pointer-events: none; }
+.diag { position: relative; display: grid; gap: 28px; }
+.path { position: relative; display: grid; gap: 14px; }
+.path li { position: relative; display: grid; grid-template-columns: 44px 1fr; gap: 0 16px; padding: 22px 22px 24px 18px; border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); transition: border-color .5s ease, background .5s ease; }
+.path .n { grid-row: span 3; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line-strong); font-size: .95rem; font-variant-numeric: tabular-nums; transition: background .5s ease, color .5s ease, border-color .5s ease; }
+.path h3 { font-size: 1.2rem; }
+.path .price { display: inline-flex; margin: 6px 0 10px; font-size: .86rem; font-weight: 500; color: var(--brand-link); }
+.path p.t { color: var(--text-secondary); font-size: .96rem; }
+.path.s1 .p1, .path.s2 .p2, .path.s3 .p3 { border-color: rgba(169,195,234,.4); background: linear-gradient(180deg, rgba(57,123,255,.12), rgba(255,255,255,.02)); }
+.path.s1 .p1 .n, .path.s2 .p2 .n, .path.s3 .p3 .n { background: var(--text-primary); color: #0A1230; border-color: transparent; }
+.path li.p2 { box-shadow: 0 0 0 1px rgba(169,195,234,.18); }
+.diag-pay { margin-top: 14px; }
+.diag .actions { margin-top: 22px; }
+.sc-doc { aspect-ratio: 4 / 5; --fs: clamp(10px, 3.4cqi, 15px); }
+.doc { position: absolute; inset: 7% 8%; display: flex; flex-direction: column; gap: .9em; padding: 1.3em 1.3em 1.2em; border-radius: .9em; background: #F3F5FA; color: #0E1730; box-shadow: 0 2em 4em -1.5em rgba(0,0,0,.8); opacity: 0; transform: translateY(1em) rotate(-1deg); transition: opacity .6s ease, transform .8s var(--out); }
+.sc-doc.s1 .doc { opacity: 1; transform: rotate(-1deg); }
+.doc header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1em; padding-bottom: .8em; border-bottom: 1px solid #D6DCE9; }
+.doc header b { display: block; font-size: 1.25em; font-weight: 600; letter-spacing: -.02em; }
+.doc header small { color: #5A6684; font-size: .84em; }
+.doc header em { flex: none; padding: .25em .7em; border-radius: 99px; background: #0E1730; color: #fff; font-size: .78em; font-weight: 500; }
+.doc .lbl { font-size: .74em; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #5A6684; }
+.doc-rows { display: grid; gap: .8em; }
+.doc-rows li { display: grid; gap: .35em; opacity: 0; transform: translateX(.6em); transition: opacity .4s ease, transform .5s var(--out); }
+.doc-rows li p { display: flex; gap: .55em; font-size: .92em; font-weight: 500; }
+.doc-rows li p span { color: #397BFF; font-variant-numeric: tabular-nums; }
+.doc-bar { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .7em; }
+.doc-bar i { height: .45em; border-radius: 99px; background: #E3E8F2; position: relative; overflow: hidden; }
+.doc-bar i::after { content: ""; position: absolute; inset: 0; width: var(--w); border-radius: 99px; background: linear-gradient(90deg, #397BFF, #9275E8); transform: scaleX(0); transform-origin: left; transition: transform .8s var(--out) .2s; }
+.doc-bar small { font-size: .76em; color: #5A6684; width: 3.6em; text-align: right; }
+.sc-doc.s2 .q1, .sc-doc.s3 .q2, .sc-doc.s4 .q3 { opacity: 1; transform: none; }
+.sc-doc.s2 .q1 .doc-bar i::after, .sc-doc.s3 .q2 .doc-bar i::after, .sc-doc.s4 .q3 .doc-bar i::after { transform: none; }
+.doc-rec { margin-top: auto; padding: .8em .9em; border-radius: .7em; background: #E8EEFB; border: 1px solid #C9D6F3; opacity: 0; transition: opacity .5s ease; }
+.doc-rec p { font-size: .9em; margin-top: .25em; }
+.sc-doc.s5 .doc-rec { opacity: 1; }
+.doc-next { display: flex; align-items: center; gap: .6em; font-size: .86em; font-weight: 500; color: #1E7A47; opacity: 0; transition: opacity .5s ease; }
+.doc-next .check { background: rgba(30,122,71,.12); color: #1E7A47; }
+.sc-doc.s6 .doc-next { opacity: 1; }
+
+/* Como trabalhamos */
+.tl { position: relative; display: grid; gap: 0; }
+.tl li { position: relative; display: grid; grid-template-columns: 36px 1fr; gap: 0 16px; padding-bottom: 28px; }
+.tl li::before { content: ""; position: absolute; left: 17.5px; top: 36px; bottom: 0; width: 1px; background: var(--line-strong); }
+.tl li::after { content: ""; position: absolute; left: 17.5px; top: 36px; bottom: 0; width: 1px; background: linear-gradient(180deg, #9DBBFF, var(--brand-strong)); transform: scaleY(0); transform-origin: top; transition: transform .8s ease .2s; }
+.tl li:last-child::before, .tl li:last-child::after { display: none; }
+.tl li.on::after { transform: none; }
+.tl .n { grid-row: span 4; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line-strong); font-size: .82rem; font-variant-numeric: tabular-nums; background: var(--bg-primary); transition: background .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease; }
+.tl li.on .n { background: var(--text-primary); color: #0A1230; border-color: transparent; box-shadow: 0 0 0 6px rgba(157,187,255,.12); }
+.tl h3 { font-size: 1.2rem; padding-top: 4px; }
+.tl p.t { color: var(--text-secondary); font-size: .96rem; margin-top: 6px; }
+.tl ul { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tl ul li { display: block; padding: 4px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--glass); font-size: .8rem; }
+.tl ul li::before, .tl ul li::after { display: none; }
+.method-points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 16px; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); }
+.method-points li { display: grid; gap: 10px; align-content: start; font-size: .9rem; line-height: 1.4; color: var(--text-secondary); }
+.method-points .icon-sm { color: var(--text-primary); }
+.speed { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; padding: 20px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--glass); }
+
+/* Contratação */
+.grid-2 { display: grid; gap: 14px; }
+.grid-2 .card { padding: 26px; }
+.grid-2 h3 { font-size: 1.18rem; margin-bottom: 8px; }
+.grid-2 p { color: var(--text-secondary); font-size: .96rem; }
+#contratacao .actions { margin-top: 26px; }
+
+/* Perguntas */
+.faq { display: grid; gap: 10px; max-width: 860px; }
+.faq details { border-radius: var(--radius-sm); border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); transition: border-color var(--ease); }
+.faq details[open] { border-color: rgba(169,195,234,.35); }
+.faq summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; cursor: pointer; list-style: none; font-weight: 500; font-size: 1.04rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary i { position: relative; width: 14px; height: 14px; flex: none; }
+.faq summary i::before, .faq summary i::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; background: var(--text-secondary); transition: transform var(--ease); }
+.faq summary i::after { transform: rotate(90deg); }
+.faq details[open] summary i::after { transform: rotate(0); }
+.faq details p { padding: 0 20px 20px; color: var(--text-secondary); max-width: 68ch; }
+
+/* Contato */
+.section-contact { isolation: isolate; overflow: hidden; }
+.contact-grid { display: grid; gap: 36px; }
+.contact-grid .eyebrow { margin-bottom: 20px; }
+.contact-grid h2 { font-size: clamp(2.1rem, 4.8cqi, 4rem); line-height: 1.03; }
+.contact-grid .lead { margin-top: 22px; color: rgba(245,247,251,.86); }
+.contact-list { display: grid; gap: 4px; margin-top: 10px; }
+.contact-list-label { margin-top: 34px; }
+.contact-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--text-primary); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.contact-link .icon { color: #BFD2F0; }
+.form { display: grid; grid-template-columns: 1fr; gap: 16px 14px; padding: 22px; }
+.field { display: grid; gap: 8px; align-content: start; }
+.field label { font-size: .86rem; color: rgba(245,247,251,.82); }
+.field input, .field textarea, .field select { width: 100%; min-height: 50px; padding: 12px 16px; background: rgba(6,10,20,.55); color: var(--text-primary); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); font: inherit; font-size: 1rem; }
+.field select option { background: #0D1424; }
+.field textarea { resize: vertical; min-height: 110px; }
+.field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: #9DBBFF; box-shadow: 0 0 0 3px rgba(125,165,255,.28); }
+.consent { display: flex; gap: 12px; align-items: flex-start; font-size: .88rem; color: rgba(245,247,251,.82); line-height: 1.5; cursor: pointer; }
+.consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: #BFD2F0; flex: none; }
+.consent a { text-decoration: underline; text-underline-offset: 3px; }
+.form-end { display: grid; gap: 12px; justify-items: start; }
+.form-end .btn { width: 100%; }
+
+/* Rodapé */
+.site-footer { border-top: 1px solid var(--line); padding: 52px 0 28px; font-size: .94rem; }
+.footer-row { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.footer-desc { margin: 14px 0 6px; font-size: .86rem; font-weight: 500; }
+.site-footer .muted { max-width: 46ch; }
+.footer-meta { display: grid; gap: 8px; align-content: start; color: var(--text-secondary); }
+.footer-legal { margin-top: 36px; color: var(--text-secondary); font-size: .84rem; }
+
+/* Entrada das seções */
+.js [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .6s var(--out); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+.scene-wrap { position: relative; }
+.form.was-validated :invalid { border-color: var(--danger); }
+.form-status { font-size: .92rem; min-height: 1.4em; }
+.form-status.is-error { color: var(--danger); }
+.form-status.is-ok { color: var(--brand-link); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Tablet e computador */
+@container page (min-width: 720px) {
+  body { font-size: 17px; }
+  .hero .actions .btn-primary { flex: none; }
+  .clients { grid-template-columns: auto 1fr; align-items: center; gap: 32px; }
+  .clients-label { max-width: 16ch; line-height: 1.4; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat:nth-child(2) { border-left: 1px solid var(--line); border-top: 0; }
+  .stat:nth-child(4) { border-left: 1px solid var(--line); }
+  .solution-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case-media .scene { aspect-ratio: 16 / 11; }
+  .mo-crm .stage { grid-template-rows: none; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); }
+  .mo-month .stage { grid-template-rows: none; grid-template-columns: 1.15fr 1fr; }
+  .mm-after { flex-direction: column; justify-content: center; text-align: center; }
+  .mm-ring { height: auto; width: 62%; max-height: none; }
+  .mm-after-txt { justify-items: center; }
+  .rd-area { right: 40%; height: 100%; }
+  .rd-strip { left: 18%; right: 18%; }
+  .rd-report { left: auto; right: 4%; top: 10%; bottom: 10%; width: 33%; justify-content: center; }
+  .rd-stat { grid-template-columns: 1fr; }
+  .mp-panel { left: auto; right: 3%; top: 4%; bottom: auto; width: 42%; }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .form { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 30px; }
+  .field-full { grid-column: 1 / -1; }
+  .form-end .btn { width: auto; }
+  .method-points { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .speed { flex-direction: row; align-items: baseline; }
+}
+@container page (min-width: 1040px) {
+  .nav-pill { display: flex; align-items: center; gap: 2px; padding: 5px; border-radius: 999px; background: rgba(255,255,255,.10); border: 1px solid var(--line); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+  .nav-pill a { color: var(--text-primary); font-size: .9rem; font-weight: 500; padding: 8px 16px; border-radius: 999px; transition: background var(--ease); white-space: nowrap; }
+  .nav-pill a:hover { background: rgba(255,255,255,.14); }
+  .header-end .btn-primary { display: inline-flex; }
+  .menu-toggle, .menu-panel { display: none !important; }
+  .hero { min-height: max(100svh, 820px); display: flex; }
+  .hero h1 { font-size: clamp(3rem, 5.1cqi, 4.6rem); }
+  .hero-inner { grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); align-items: center; gap: 28px 56px; padding-top: 120px; }
+  .clients { grid-column: 1 / -1; }
+  .sh-stage { aspect-ratio: 16 / 11; }
+  .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .stat + .stat { border-top: 0; border-left: 1px solid var(--line); }
+  .solution { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: 44px; padding: 14px 40px 14px 14px; }
+  .solution .scene { aspect-ratio: 16 / 11; }
+  .solution:nth-child(even) { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); padding: 14px 14px 14px 40px; }
+  .solution:nth-child(even) .scene-wrap { order: 2; }
+  .case { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  .case-body { justify-content: center; padding: 32px 40px; }
+  .case-media { padding: 12px; }
+  .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 96px; align-items: start; }
+  .split .section-head { position: sticky; top: 120px; margin-bottom: 0; }
+  .diag { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+  .sc-doc { aspect-ratio: 1 / 1.05; }
+  .tl { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+  .tl li { grid-template-columns: 1fr; padding-bottom: 0; align-content: start; }
+  .tl .n { grid-row: auto; margin-bottom: 18px; }
+  .tl li::before, .tl li::after { left: 46px; right: -18px; top: 17.5px; bottom: auto; width: auto; height: 1px; }
+  .tl li::after { transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, #9DBBFF, var(--brand-strong)); }
+  .tl li.on::after { transform: none; }
+  .contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; align-items: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+  .js [data-reveal] { opacity: 1; transform: none; }
+}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<div class="page" id="page" data-bg="c">
+
 <header class="site-header" id="top">
   <div class="container header-row">
     <a class="brand" href="#top"><span class="wordmark" aria-label="Arke Analytica"><span>ARKE</span><span class="wordmark-b">ANALYTICA</span></span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-    <nav class="site-nav" id="site-nav" aria-label="Menu">
-      <div class="nav-pill">
-        <a href="#solucoes">Solutions</a>
-        <a href="#projetos">Work</a>
-        <a href="#metodologia">How we work</a>
-        <a href="#contratacao">Engagement</a>
-      </div>
-      <div class="header-end">
-        <span class="lang" role="group" aria-label="Language"><a href="../pt/" hreflang="pt" lang="pt" data-lang="pt">PT</a><a href="#top" hreflang="en" lang="en" data-lang="en" aria-current="true">EN</a></span>
-        <a class="btn btn-primary btn-sm" href="#contato">Talk to Arke</a>
-      </div>
+    <nav class="nav-pill" aria-label="Menu">
+      <a href="#solucoes">Solutions</a>
+      <a href="#projetos">Work</a>
+      <a href="#diagnostico">Diagnostic</a>
+      <a href="#metodologia">How we work</a>
     </nav>
+    <div class="header-end">
+      <span class="lang" role="group" aria-label="Language"><a href="../pt/" hreflang="pt" lang="pt" data-lang="pt">PT</a><a href="#top" hreflang="en" lang="en" data-lang="en" aria-current="true">EN</a></span>
+      <a class="btn btn-primary btn-sm" href="#contato">Book a call</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-panel">Menu</button>
+    </div>
+    <div class="menu-panel" id="menu-panel">
+      <a href="#solucoes">Solutions</a>
+      <a href="#projetos">Work</a>
+      <a href="#diagnostico">Diagnostic</a>
+      <a href="#metodologia">How we work</a>
+      <a class="btn btn-primary" href="#contato">Book a 30-minute call</a>
+    </div>
   </div>
 </header>
+
 <main id="main">
+
+<!-- 1. Topo -->
 <section class="hero">
   <div class="flutes" aria-hidden="true"></div>
   <div class="container hero-inner">
-    <aside class="glass hero-card" aria-label="Projects in production">
-      <p class="badge"><span class="badge-dot" aria-hidden="true"></span>First operational release in as little as 1 week*</p>
-      <ul><li class="glass-row"><p class="glass-row-head"><strong>Multi-agent system</strong><span>Enterprise</span></p><div class="glass-row-body"><p><span>Before</span><b>1 month</b></p><i>per cycle</i><p class="end"><span>After</span><b>40 min</b></p></div></li><li class="glass-row"><p class="glass-row-head"><strong>Road inspection</strong><span>Public sector</span></p><div class="glass-row-body"><p><span>Input</span><b>Video</b></p><i>AI</i><p class="end"><span>Output</span><b>Report</b></p></div></li></ul>
-      <p class="footnote">*For eligible projects, following discovery and scope approval. Timelines vary by complexity, integrations and client availability.</p>
-    </aside>
-    <div class="hero-main">
-      <div class="hero-copy">
-        <h1><span>Your business is unique.</span> <span>Your software should be, too.</span></h1>
-        <p class="lead">We understand the complexity of your operations and engineer custom software built around your processes — not the other way around.</p>
-      </div>
+    <div class="hero-copy">
+      <p class="eyebrow">Custom software engineering</p>
+      <h1><span>Your business is unique.</span> <span>Your software should be, too.</span></h1>
+      <p class="lead">We understand the complexity of your operations and engineer custom software built around your processes, not the other way around.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#contato">Let&#x27;s discuss your project <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
-        <a class="btn btn-text" href="#projetos">Explore our work <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-primary" href="#contato">Book a 30-minute call <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-text" href="#projetos">See our work <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+      </div>
+      <p class="hero-note">No cost, no commitment.</p>
+    </div>
+
+    <div class="scene-wrap">
+      <div class="showcase glass" id="showcase" aria-label="Projects in motion">
+        <div class="sh-top"><p class="tag" data-sh-tag>Sales · Finance</p><p class="sh-count"><b data-sh-n>01</b> / 05</p></div>
+        <div class="sh-stage" id="sh-stage" aria-hidden="true"></div>
+        <div class="sh-bottom"><p class="sh-title" data-sh-title>Sales and collections organized in WhatsApp</p><a class="sh-link" href="#projetos" data-sh-go>See the project <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        <div class="sh-bars"><button type="button" aria-label="Project 1"><i></i></button><button type="button" aria-label="Project 2"><i></i></button><button type="button" aria-label="Project 3"><i></i></button><button type="button" aria-label="Project 4"><i></i></button><button type="button" aria-label="Project 5"><i></i></button></div>
       </div>
     </div>
-    <ul class="hero-points"><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span>Diagnosis before code</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10.500A.5.5 0 0 1 6.500 20V4a.5.5 0 0 1 .5-.5z"/><path d="M9.500 12h5M9.500 15.500h5"/></svg><span>Scope and milestones in writing</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.500" width="14" height="10" rx="2"/><path d="M8.500 10.500V8a3.500 3.500 0 0 1 7 0v2.500"/></svg><span>Ownership defined by contract</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4M6 4.500h11l-2 3.750 2 3.750H6"/></svg><span>Assisted rollout</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.500 12a7.500 7.500 0 0 1 13-5.100L19.500 9M19.500 4.500V9H15M19.500 12a7.500 7.500 0 0 1-13 5.100L4.500 15M4.500 19.500V15H9"/></svg><span>Evolution on demand</span></li></ul>
+
+    <div class="clients">
+      <p class="clients-label">Companies that trust Arke</p>
+      <div class="marquee">
+        <ul class="marquee-track"><li>Atlântico<svg class="flag" viewBox="0 0 20 14" role="img" aria-label="Brazil"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.7L18.3 7 10 12.3 1.7 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/><path d="M6.8 6.2q3.3-1 6.5.9" stroke="#fff" stroke-width=".55" fill="none"/></svg></li><li>Agilean<svg class="flag" viewBox="0 0 20 14" role="img" aria-label="Brazil"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.7L18.3 7 10 12.3 1.7 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/><path d="M6.8 6.2q3.3-1 6.5.9" stroke="#fff" stroke-width=".55" fill="none"/></svg></li><li>Aval<svg class="flag" viewBox="0 0 20 14" role="img" aria-label="Brazil"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.7L18.3 7 10 12.3 1.7 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/><path d="M6.8 6.2q3.3-1 6.5.9" stroke="#fff" stroke-width=".55" fill="none"/></svg></li><li>Lab Vida <span class="city">(New York)</span><svg class="flag" viewBox="0 0 19 10" role="img" aria-label="United States"><rect width="19" height="10" fill="#B22234"/><path d="M0 1.15h19M0 2.69h19M0 4.23h19M0 5.77h19M0 7.31h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg></li></ul>
+        <ul class="marquee-track" aria-hidden="true"><li>Atlântico<svg class="flag" viewBox="0 0 20 14" role="img" aria-label="Brazil"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.7L18.3 7 10 12.3 1.7 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/><path d="M6.8 6.2q3.3-1 6.5.9" stroke="#fff" stroke-width=".55" fill="none"/></svg></li><li>Agilean<svg class="flag" viewBox="0 0 20 14" role="img" aria-label="Brazil"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.7L18.3 7 10 12.3 1.7 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/><path d="M6.8 6.2q3.3-1 6.5.9" stroke="#fff" stroke-width=".55" fill="none"/></svg></li><li>Aval<svg class="flag" viewBox="0 0 20 14" role="img" aria-label="Brazil"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.7L18.3 7 10 12.3 1.7 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/><path d="M6.8 6.2q3.3-1 6.5.9" stroke="#fff" stroke-width=".55" fill="none"/></svg></li><li>Lab Vida <span class="city">(New York)</span><svg class="flag" viewBox="0 0 19 10" role="img" aria-label="United States"><rect width="19" height="10" fill="#B22234"/><path d="M0 1.15h19M0 2.69h19M0 4.23h19M0 5.77h19M0 7.31h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg></li></ul>
+      </div>
+    </div>
   </div>
 </section>
-<section class="section section-tight" id="autoridade">
+
+<!-- 2. Números -->
+<section class="section" id="autoridade">
   <div class="container">
     <div class="section-head" data-reveal>
       <p class="eyebrow">Track record</p>
       <h2>Experience that turns into working solutions.</h2>
-      
     </div>
-    <dl class="stats" data-reveal><div class="stat"><dt>1 month → 40 min</dt><dd>one enterprise operational cycle, after the multi-agent system</dd></div><div class="stat"><dt>6+ years</dt><dd>of AI and machine learning in production, from public sector to enterprise</dd></div><div class="stat"><dt>2 countries</dt><dd>engineering in Brazil and applied research in the United States</dd></div><div class="stat"><dt>Standard</dt><dd>road inspection system adopted as the public-sector standard</dd></div></dl>
-    <p class="footnote">Facts from projects our engineers have worked on.</p>
+    <dl class="stats" data-scene data-steps="250" data-reveal>
+      <div class="stat"><dt><span class="from">1 month</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span><span data-to="40" data-at="1" data-dur="1400">0</span> min</span></dt><dd>a process that took a month per cycle now closes in 40 minutes</dd></div>
+      <div class="stat"><dt><span><span data-to="8" data-at="1" data-dur="1000">0</span>+ years</span></dt><dd>of artificial intelligence (AI) in real use, from the public sector to large companies</dd></div>
+      <div class="stat"><dt>International</dt><dd class="flags"><svg class="flag" viewBox="0 0 20 14" role="img" aria-label="Brazil"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.7L18.3 7 10 12.3 1.7 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/><path d="M6.8 6.2q3.3-1 6.5.9" stroke="#fff" stroke-width=".55" fill="none"/></svg><svg class="flag" viewBox="0 0 19 10" role="img" aria-label="United States"><rect width="19" height="10" fill="#B22234"/><path d="M0 1.15h19M0 2.69h19M0 4.23h19M0 5.77h19M0 7.31h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg></dd><dd>projects in Brazil and the United States</dd></div>
+      <div class="stat"><dt><span><span data-to="30" data-at="1" data-dur="1400">0</span>+ projects</span></dt><dd>delivered and in use, from the public sector to startups</dd></div>
+    </dl>
+    <p class="footnote stats-note">Facts from projects our engineers have worked on.</p>
   </div>
 </section>
+
+<!-- 3. O que fazemos -->
 <section class="section" id="solucoes">
   <div class="container">
     <div class="section-head" data-reveal>
@@ -81,9 +768,102 @@
       <h2>Software designed for the problem. Built for the operation.</h2>
       <p class="lead">We build products and systems that remove limitations, connect processes and make complex operations more efficient.</p>
     </div>
-    <ul class="grid grid-3" data-reveal><li class="card"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg><h3>Custom management systems</h3><p>Your workflows, rules and data in a single platform.</p></li><li class="card"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18M6.5 6.8h.01M9 6.8h.01"/></svg><h3>Web platforms and applications</h3><p>Digital products for teams, customers and partners.</p></li><li class="card"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="6" height="5" rx="1.2"/><rect x="15" y="15" width="6" height="5" rx="1.2"/><path d="M9 6.5h4.5a2 2 0 0 1 2 2V15M13 12.5l2.5 2.5 2.5-2.5"/></svg><h3>Process automation</h3><p>Less manual work and less rework in the routines that repeat.</p></li><li class="card"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="12" r="2.2"/><circle cx="18.5" cy="5.5" r="2.2"/><circle cx="18.5" cy="18.5" r="2.2"/><path d="M7.5 11l9-4.5M7.5 13l9 4.5"/></svg><h3>Integrations and systems architecture</h3><p>Connecting the tools and data your operation already relies on.</p></li><li class="card"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.9 5.1a2 2 0 0 0 1.2 1.2l5.1 1.9-5.1 1.9a2 2 0 0 0-1.2 1.2L12 19.9l-1.9-5.1a2 2 0 0 0-1.2-1.2l-5.1-1.9 5.1-1.9a2 2 0 0 0 1.2-1.2z"/></svg><h3>AI applications</h3><p>Automation and decision support where there is real value.</p></li><li class="card"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V4M16 20v-6M3 20.5h18"/><path d="M20.5 20V8.5"/></svg><h3>Data and dashboards</h3><p>Operational visibility and indicators for management.</p></li></ul>
+    <ul class="solutions">
+      <li class="card solution" data-reveal>
+        <div class="scene-wrap">
+          <div class="scene sc-build" data-scene data-steps="400,600,300,250,250,250,600" data-hold="3200" aria-hidden="true">
+            <div class="stage">
+              <div class="win">
+                <div class="win-bar"><i></i><i></i><i></i><span>Your company's system</span></div>
+                <div class="win-body">
+                  <aside class="win-side"><b></b><i></i><i></i><i></i><i></i></aside>
+                  <div class="win-main">
+                    <p class="win-title">In progress <small>today</small></p>
+                    <ul class="win-rows">
+                      <li class="r1"><span>Contract 0142 · Aurora</span><em class="ok">On track</em></li>
+                      <li class="r2"><span>Order 0388 · Downtown Store</span><em class="at">Attention</em></li>
+                      <li class="r3"><span>North Warehouse site</span><em class="ok">On track</em></li>
+                      <li class="r4"><span>Ticket 0911</span><em class="lo">Resolved</em></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="solution-head"><h3>Custom platforms</h3><p>Management systems with your industry's workflows, rules and data in a single platform.</p></div>
+          <ul class="solution-list">
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Construction</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Manufacturing</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Retail</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Law firms</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Medical clinics and practices</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Accounting</li>
+          </ul>
+        </div>
+      </li>
+      <li class="card solution" data-reveal>
+        <div class="scene-wrap">
+          <div class="scene sc-tasks" data-scene data-steps="600,1000,1000,1000,1000,500" data-hold="3200" aria-hidden="true">
+            <div class="stage">
+              <div class="tk-head"><b>Today's routines</b><span class="tk-chip"><span class="w">Assistant working</span><span class="d">All caught up</span></span></div>
+              <ul class="tk-list">
+                <li class="t1"><i class="st"></i><span>Check incoming invoices</span><small>done</small></li>
+                <li class="t2"><i class="st"></i><span>Answer quote requests</span><small>done</small></li>
+                <li class="t3"><i class="st"></i><span>Post payments to finance</span><small>done</small></li>
+                <li class="t4"><i class="st"></i><span>Chase late payments</span><small>done</small></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="solution-head"><h3>AI-automated processes</h3><p>Artificial intelligence assistants that take over the repetitive routines of your operation, with less manual work and less rework.</p></div>
+          <ul class="solution-list">
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Purchasing</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Lead qualification</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Customer service</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Support</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Collections</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Financial entries and reconciliation</li>
+          </ul>
+        </div>
+      </li>
+      <li class="card solution" data-reveal>
+        <div class="scene-wrap">
+          <div class="scene sc-connect" data-scene data-steps="400,500,450,450,600,400" data-hold="3600" aria-hidden="true">
+            <div class="stage">
+              <svg class="cn-lines" viewBox="0 0 100 60" preserveAspectRatio="none">
+                <path class="base l1" pathLength="1" d="M32 12 C47 12 47 30 62 30"/>
+                <path class="base l2" pathLength="1" d="M32 30 L62 30"/>
+                <path class="base l3" pathLength="1" d="M32 48 C47 48 47 30 62 30"/>
+                <path class="flow" pathLength="1" d="M32 12 C47 12 47 30 62 30"/>
+                <path class="flow" pathLength="1" d="M32 30 L62 30"/>
+                <path class="flow" pathLength="1" d="M32 48 C47 48 47 30 62 30"/>
+              </svg>
+              <ul class="cn-src"><li class="c1"><i></i>Sales</li><li class="c2"><i></i>Finance</li><li class="c3"><i></i>Spreadsheets</li></ul>
+              <div class="cn-dash">
+                <b>Management view</b>
+                <div class="cn-bars"><i style="--h:45%;--i:0"></i><i style="--h:70%;--i:1"></i><i style="--h:55%;--i:2"></i><i style="--h:85%;--i:3"></i><i style="--h:65%;--i:4"></i></div>
+                <span class="live"><i></i>Real time</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="solution-head"><h3>Systems and data integration</h3><p>Connecting the tools your operation already uses, with visibility for management.</p></div>
+          <ul class="solution-list">
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Custom dashboards</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Real-time indicators</li>
+            <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Management assistants</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
   </div>
 </section>
+
+<!-- 4. Projetos -->
 <section class="section" id="projetos">
   <div class="container">
     <div class="section-head" data-reveal>
@@ -91,68 +871,285 @@
       <h2>Solutions built for concrete challenges.</h2>
       <p class="lead">Projects delivered by the engineers on our team. Clients are not named for confidentiality reasons.</p>
     </div>
-    <div class="cases" data-reveal><article class="case case-wide"><div class="case-media"><img src="../assets/img/inspecao-rodovias.webp" width="1400" height="784" alt="Stretch of road with patches and cracks marked by automated detection boxes." loading="lazy"></div><div class="case-body"><p class="tag">Public sector</p><h3>AI road inspection</h3><dl><div><dt>Challenge</dt><dd>Turning kilometers of road footage into an objective pavement condition report.</dd></div><div><dt>Solution</dt><dd>An ensemble of neural networks that detects potholes, cracks and patches automatically.</dd></div><div><dt>Result</dt><dd>Adopted as the road inspection standard in the public sector.</dd></div></dl></div></article><article class="case"><div class="case-media case-figure"><p class="figure-line"><span>1 month</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><strong>40 min</strong></p><p class="muted">per operational cycle</p></div><div class="case-body"><p class="tag">Enterprise</p><h3>Multi-agent system</h3><dl><div><dt>Challenge</dt><dd>An operational workflow that took a month per cycle.</dd></div><div><dt>Solution</dt><dd>A multi-agent system in production, running the workflow end to end.</dd></div><div><dt>Result</dt><dd>The cycle now closes in about 40 minutes.</dd></div></dl></div></article><article class="case case-wide case-flip"><div class="case-media"><img src="../assets/img/biblioteca-geoespacial.webp" width="1600" height="722" alt="Geospatial analysis tool with heat maps for hotels, businesses and points of interest." loading="lazy"></div><div class="case-body"><p class="tag">Research · United States</p><h3>Geospatial library</h3><dl><div><dt>Challenge</dt><dd>Bringing urban data from different sources and geometries onto a single analysis grid.</dd></div><div><dt>Solution</dt><dd>A calibrated rasterization library with configurable weights per layer.</dd></div><div><dt>Result</dt><dd>Adopted by an urban analytics framework at a New York university.</dd></div></dl></div></article><article class="case"><div class="case-media case-figure"><p class="figure-line"><strong>Thousands of projects</strong></p><p class="muted">in a single forecasting base</p></div><div class="case-body"><p class="tag">Startup · Construction</p><h3>Construction analytics</h3><dl><div><dt>Challenge</dt><dd>Anticipating schedule delays and waste generation on construction sites.</dd></div><div><dt>Solution</dt><dd>Machine learning models that integrate data from thousands of construction projects.</dd></div></dl></div></article></div>
-  </div>
-</section>
-<section class="section" id="segmentos">
-  <div class="container">
-    <div class="section-head" data-reveal>
-      <p class="eyebrow">Industries</p>
-      <h2>We understand different operations. We build specific solutions.</h2>
-      
+    <div class="carousel" data-carousel data-reveal>
+      <div class="carousel-track" tabindex="0">
+
+        <article class="case" aria-label="1 of 5">
+          <div class="case-media"><div class="scene mo-crm" data-scene data-steps="700,1300,1300,1300,900" data-hold="3200" aria-hidden="true"><div class="stage">
+            <div class="crm-board">
+              <div class="crm-col"><p class="crm-col-h">New contact</p><div class="crm-slot"><div class="crm-card is-hot"><b>Sol Obras</b><span>Asked for a quote</span></div></div><div class="crm-card"><b>Clínica Viva</b><span>Online booking</span></div><div class="crm-card"><b>Loja Prisma</b><span>First contact</span></div></div>
+              <div class="crm-col"><p class="crm-col-h">Qualified</p><div class="crm-slot"></div><div class="crm-card"><b>Grupo Norte</b><span>Proposal sent</span></div></div>
+              <div class="crm-col"><p class="crm-col-h">Closed</p><div class="crm-card is-paid"><b>Mercado Azul</b><span><i></i>Invoice sent</span></div><div class="crm-card is-done"><b>Studio Lima</b><span>Paid</span></div></div>
+            </div>
+            <div class="crm-chat">
+              <p class="crm-chat-h"><span class="crm-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l1.9 5.1a2 2 0 0 0 1.2 1.2l5.1 1.9-5.1 1.9a2 2 0 0 0-1.2 1.2L12 19.9l-1.9-5.1a2 2 0 0 0-1.2-1.2l-5.1-1.9 5.1-1.9a2 2 0 0 0 1.2-1.2z"/></svg></span><span><b>Sales assistant</b><small>WhatsApp</small></span></p>
+              <p class="crm-msg m1">Hi! I'd like a quote for our project.</p>
+              <p class="crm-msg m2 out">Sure! How many projects do you run per year?</p>
+              <p class="crm-msg m3">About 12, with a team of 40.</p>
+              <p class="crm-msg m4 tagm">Contact qualified and moved on the board</p>
+            </div>
+          </div></div></div>
+          <div class="case-body">
+            <p class="tag">Sales · Finance</p>
+            <h3>Sales and collections organized in WhatsApp</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>Quote requests, proposals and payment reminders lost in WhatsApp chats, with no view of what was about to close.</dd></div>
+              <div><dt>Solution</dt><dd>A board with every opportunity and an artificial intelligence assistant that answers on WhatsApp, picks out the promising contacts and chases late payments.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="case" aria-label="2 of 5">
+          <div class="case-media"><div class="scene mo-gantt" data-scene data-steps="600,3300,600" data-hold="3600" aria-hidden="true"><div class="stage">
+            <p class="g-head"><span>Construction schedule</span><span class="g-chip">Forecast delay: +6 days</span></p>
+            <div class="g-body">
+              <ul class="g-labels"><li>Foundation</li><li>Structure</li><li>Masonry</li><li class="late">Utilities</li><li>Finishes</li></ul>
+              <div class="g-track">
+                <ul class="g-bars g-base"><li><i style="--s:0%;--w:22%"></i></li><li><i style="--s:16%;--w:30%"></i></li><li><i style="--s:38%;--w:26%"></i></li><li><i class="late" style="--s:52%;--w:28%"></i></li><li><i style="--s:72%;--w:26%"></i></li></ul>
+                <ul class="g-bars g-done"><li><i style="--s:0%;--w:22%"></i></li><li><i style="--s:16%;--w:30%"></i></li><li><i style="--s:38%;--w:26%"></i></li><li><i class="late" style="--s:52%;--w:28%"></i></li><li><i style="--s:72%;--w:26%"></i></li></ul>
+                <span class="g-today"><b>Today</b></span>
+              </div>
+            </div>
+          </div></div></div>
+          <div class="case-body">
+            <p class="tag">Startup · Construction</p>
+            <h3>Forecasting construction delays</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>Knowing ahead of time that a project will run late, and how much waste it will generate, instead of finding out afterwards.</dd></div>
+              <div><dt>Solution</dt><dd>Models that learned from data on thousands of construction projects and point out where the schedule is at risk.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="case" aria-label="3 of 5">
+          <div class="case-media"><div class="scene mo-month" data-scene data-steps="500,2800,400,2200,600" data-hold="3600" aria-hidden="true"><div class="stage">
+            <div class="mm-box mm-before">
+              <header><b>Before</b><small>1 month per cycle</small></header>
+              <div class="mm-cal" id="mm-cal"></div>
+            </div>
+            <div class="mm-box mm-after">
+              <div class="mm-ring">
+                <svg viewBox="0 0 100 100"><defs><linearGradient id="mmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DBBFF"/><stop offset="1" stop-color="#9275E8"/></linearGradient></defs><circle class="bg" cx="50" cy="50" r="42"/><circle class="fg" cx="50" cy="50" r="42" pathLength="100"/></svg>
+                <p><b><span data-to="40" data-at="3" data-dur="2000">0</span></b><small>minutes</small></p>
+              </div>
+              <div class="mm-after-txt"><small>After</small><b>The whole cycle in 40 minutes</b><span class="live"><i></i>Cycle complete</span></div>
+            </div>
+          </div></div></div>
+          <div class="case-body">
+            <p class="tag">Large company</p>
+            <h3>A month of work in 40 minutes</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>A process the team took a month to close, every cycle.</dd></div>
+              <div><dt>Solution</dt><dd>A set of artificial intelligence assistants that runs the process end to end, each one handling its part.</dd></div>
+              <div><dt>Result</dt><dd class="result">The cycle now closes in about 40 minutes.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="case" aria-label="4 of 5">
+          <div class="case-media"><div class="scene mo-map" data-scene data-steps="500,900,900,1300,1700,600" data-hold="3600" aria-hidden="true"><div class="stage">
+            <svg class="mp-svg" id="mp-svg" viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice"></svg>
+            <div class="mp-panel">
+              <b>Layers <span class="label">weight</span></b>
+              <div class="mp-row"><span><i class="dot" style="--c:#E7ECFA"></i>Hotels</span><span class="mp-track" style="--a:72%;--b:38%"></span></div>
+              <div class="mp-row"><span><i class="dot" style="--c:#9DBBFF"></i>Businesses</span><span class="mp-track" style="--a:40%;--b:82%"></span></div>
+              <div class="mp-row"><span><i class="dot" style="--c:#9275E8"></i>Points of interest</span><span class="mp-track" style="--a:55%;--b:60%"></span></div>
+              <p class="mp-legend">Less<i></i>More</p>
+            </div>
+          </div></div></div>
+          <div class="case-body">
+            <p class="tag">Research · United States</p>
+            <h3>The whole city on one comparable map</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>Bringing city data from different sources and formats onto a single map, comparable block by block.</dd></div>
+              <div><dt>Solution</dt><dd>A tool that spreads each dataset over the same grid on the map, with the weight each layer should carry.</dd></div>
+              <div><dt>Result</dt><dd class="result">Adopted by an urban analytics framework at a New York university.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="case" aria-label="5 of 5">
+          <div class="case-media"><div class="scene mo-road" data-scene data-steps="700,1600,1600,1550,1450,1100" data-hold="3800" aria-hidden="true"><div class="stage">
+            <div class="rd-area">
+              <div class="rd-strip">
+                <div class="rd-layer">
+                  <div class="def d1"><i class="shape"></i><span class="box"><b>Pothole</b></span></div>
+                  <div class="def d2"><svg class="shape" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M2 12 L14 7 L22 13 L35 6 L47 12 L58 5 L70 11 L83 6 L98 10"/><path d="M47 12 L52 18"/></svg><span class="box"><b>Crack</b></span></div>
+                  <div class="def d3"><i class="shape"></i><span class="box"><b>Patch</b></span></div>
+                  <div class="def d4"><svg class="shape" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M3 8 L18 13 L30 7 L44 14 L58 8 L72 13 L86 7 L97 11"/></svg><span class="box"><b>Crack</b></span></div>
+                </div>
+              </div>
+              <span class="rd-scan"><b>Camera</b></span>
+            </div>
+            <div class="rd-report">
+              <header><b>Road section report</b><span class="rd-state"><span class="w">Analyzing video</span><span class="d">Report ready</span></span></header>
+              <div class="rd-stat">
+                <p class="km">Distance analyzed <b><span data-to="12.4" data-dec="1" data-at="1" data-dur="7000">0</span> km</b></p>
+                <p>Potholes <b data-set="2:1">0</b></p>
+                <p>Cracks <b data-set="3:1,5:2">0</b></p>
+                <p>Patches <b data-set="4:1">0</b></p>
+              </div>
+            </div>
+          </div></div></div>
+          <div class="case-body">
+            <p class="tag">Public sector</p>
+            <h3>Road inspection from video</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>Turning hours of road footage into a clear report on the condition of the pavement.</dd></div>
+              <div><dt>Solution</dt><dd>A system that watches the video and marks potholes, cracks and patches on its own.</dd></div>
+              <div><dt>Result</dt><dd class="result">Adopted as the road inspection standard in the public sector.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots"><button type="button" class="carousel-dot" aria-label="Go to project 1"></button><button type="button" class="carousel-dot" aria-label="Go to project 2"></button><button type="button" class="carousel-dot" aria-label="Go to project 3"></button><button type="button" class="carousel-dot" aria-label="Go to project 4"></button><button type="button" class="carousel-dot" aria-label="Go to project 5"></button></div>
+        <p class="carousel-count"><b data-current>01</b> / 05</p>
+        <div class="carousel-arrows">
+          <button type="button" class="carousel-btn" data-prev aria-label="Previous project"><svg class="icon-sm flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="carousel-btn" data-next aria-label="Next project"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
     </div>
-    <ul class="segments" data-reveal><li class="segment"><span class="segment-n">01</span><h3>Construction</h3><p>Sites, crews, activities and operational control.</p></li><li class="segment"><span class="segment-n">02</span><h3>E-commerce</h3><p>Orders, integrations, management and sales automation.</p></li><li class="segment"><span class="segment-n">03</span><h3>Healthcare</h3><p>Administrative processes, patient service and information, with privacy requirements in mind.</p></li><li class="segment"><span class="segment-n">04</span><h3>Education</h3><p>Platforms, academic management and learning workflows.</p></li></ul>
   </div>
 </section>
+
+<!-- 5. Desafios -->
 <section class="section" id="desafios">
   <div class="container split">
     <div class="section-head" data-reveal>
       <p class="eyebrow">Challenges we solve</p>
       <h2>When software limits the business, it is time to build differently.</h2>
-      
     </div>
     <div data-reveal>
-      <ul class="checklist"><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Off-the-shelf tools that don&#x27;t fit the rules of your operation.</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Processes bent to work around system limitations.</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Low adoption and too much complexity for your teams.</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Spreadsheets, manual tasks and fragmented data.</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Recurring licenses that don&#x27;t match what you need.</span></li><li><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>The need to build technology without hiring an in-house team.</span></li></ul>
-      <p class="closing">The answer isn&#x27;t necessarily one more tool. It is the right solution for the right process.</p>
+      <ul class="checklist">
+        <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Off-the-shelf tools that don't fit the rules of your operation.</span></li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Processes bent to work around system limitations.</span></li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Low adoption and too much complexity for your teams.</span></li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Spreadsheets, manual tasks and fragmented data.</span></li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Recurring licenses that don't match what you need.</span></li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>The need to build technology without hiring an in-house team.</span></li>
+      </ul>
+      <p class="closing">The answer isn't necessarily one more tool. It is the right solution for the right process.</p>
     </div>
   </div>
 </section>
+
+<!-- 6. Diagnóstico -->
+<section class="section section-diag" id="diagnostico">
+  <div class="container">
+    <div class="diag">
+      <div>
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Where to start</p>
+          <h2>First, a conversation. Then, a fixed-price diagnostic.</h2>
+          <p class="lead">Before proposing any system, we understand your operation. You only invest in the project once you know exactly what you will get.</p>
+        </div>
+        <ol class="path" data-scene data-steps="300,700,700" data-hold="0" data-once data-reveal>
+          <li class="p1"><span class="n">1</span><h3>30-minute call</h3><span class="price">No cost</span><p class="t">You tell us how your operation works today and where it gets stuck. If it isn't a problem we solve, we'll tell you right away.</p></li>
+          <li class="p2"><span class="n">2</span><h3>2-week diagnostic</h3><span class="price">BRL 2,000, fixed price</span><p class="t">Up to two meetings with the people who run the operation, not just the technology team. You get a document with the 2 or 3 problems that weigh the most, the estimated impact of each one and the recommended path.</p></li>
+          <li class="p3"><span class="n">3</span><h3>Fixed-scope project</h3><span class="price">Price set before we start</span><p class="t">What the diagnostic recommended, built with a delivery for you to review every 2 weeks.</p></li>
+        </ol>
+        <p class="footnote diag-pay">Diagnostic payment: half on signing, half on delivery of the document.</p>
+        <div class="actions"><a class="btn btn-primary" href="#contato">Book a 30-minute call</a></div>
+      </div>
+      <div class="scene-wrap" data-reveal>
+        <div class="scene sc-doc" data-scene data-steps="400,700,600,600,900,700" data-hold="3800" aria-hidden="true">
+          <div class="stage">
+            <div class="doc">
+              <header><div><b>Diagnostic</b><small>Sample company · 2 weeks</small></div><em>Fixed price</em></header>
+              <p class="lbl">Prioritized problems · impact</p>
+              <ol class="doc-rows">
+                <li class="q1"><p><span>01</span>Payments reconciled by hand</p><div class="doc-bar"><i style="--w:88%"></i><small>High</small></div></li>
+                <li class="q2"><p><span>02</span>Orders untracked until delivery</p><div class="doc-bar"><i style="--w:62%"></i><small>Medium</small></div></li>
+                <li class="q3"><p><span>03</span>Monthly report built in spreadsheets</p><div class="doc-bar"><i style="--w:40%"></i><small>Medium</small></div></li>
+              </ol>
+              <div class="doc-rec"><p class="lbl">Recommended path</p><p>Connect sales to finance and automate payment reconciliation.</p></div>
+              <p class="doc-next"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Next step: fixed-scope project</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Como trabalhamos -->
 <section class="section" id="metodologia">
   <div class="container">
     <div class="section-head" data-reveal>
       <p class="eyebrow">Method</p>
       <h2>Rigor in the process. Clarity in every delivery.</h2>
-      
     </div>
-    <ol class="steps" data-reveal><li class="step"><span class="step-n">01</span><h3>Discovery and diagnosis</h3><p>Understanding the business, its processes, its users and the existing limitations.</p><p class="step-label">Deliverables</p><ul><li>Current process map</li><li>Limitations and priorities</li></ul></li><li class="step"><span class="step-n">02</span><h3>Architecture and design</h3><p>Proposed solution, flows, priorities and requirements.</p><p class="step-label">Deliverables</p><ul><li>Solution design</li><li>Flows and requirements</li></ul></li><li class="step"><span class="step-n">03</span><h3>Scope and validation</h3><p>Deliverables, acceptance criteria, schedule and investment.</p><p class="step-label">Deliverables</p><ul><li>Written scope</li><li>Acceptance criteria</li><li>Schedule and investment</li></ul></li><li class="step"><span class="step-n">04</span><h3>Engineering and testing</h3><p>Development, validation and milestone tracking.</p><p class="step-label">Deliverables</p><ul><li>Releases per milestone</li><li>Validation with your team</li></ul></li><li class="step"><span class="step-n">05</span><h3>Assisted rollout</h3><p>Go-live, guidance and contracted adjustments.</p><p class="step-label">Deliverables</p><ul><li>System in operation</li><li>Team guidance</li></ul></li><li class="step"><span class="step-n">06</span><h3>Evolution</h3><p>Optional maintenance and improvements after delivery.</p><p class="step-label">Deliverables</p><ul><li>Maintenance</li><li>New features</li></ul></li></ol>
-    <p class="speed" data-reveal><span class="badge-dot" aria-hidden="true"></span>On tightly scoped projects, the first release can go live 1 week after scope approval.</p>
+    <ol class="tl">
+      <li><span class="n">01</span><h3>Discovery and diagnosis</h3><p class="t">Understanding the business, its processes, its users and the existing limitations.</p><ul><li>Current process map</li><li>Limitations and priorities</li></ul></li>
+      <li><span class="n">02</span><h3>Architecture and design</h3><p class="t">Proposed solution, flows, priorities and requirements.</p><ul><li>Solution design</li><li>Flows and requirements</li></ul></li>
+      <li><span class="n">03</span><h3>Scope and validation</h3><p class="t">Deliverables, acceptance criteria, schedule and investment.</p><ul><li>Written scope</li><li>Acceptance criteria</li><li>Schedule and investment</li></ul></li>
+      <li><span class="n">04</span><h3>Engineering and testing</h3><p class="t">Development, validation and milestone tracking.</p><ul><li>Releases per milestone</li><li>Validation with your team</li></ul></li>
+      <li><span class="n">05</span><h3>Assisted rollout</h3><p class="t">Go-live, guidance and contracted adjustments.</p><ul><li>System in operation</li><li>Team guidance</li></ul></li>
+      <li><span class="n">06</span><h3>Evolution</h3><p class="t">Optional maintenance and improvements after delivery.</p><ul><li>Maintenance</li><li>New features</li></ul></li>
+    </ol>
+    <ul class="method-points" data-reveal>
+      <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span>Diagnosis before code</span></li>
+      <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10.5A.5.5 0 0 1 6.5 20V4a.5.5 0 0 1 .5-.5z"/><path d="M9.5 12h5M9.5 15.5h5"/></svg><span>Scope and milestones in writing</span></li>
+      <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg><span>Ownership defined by contract</span></li>
+      <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4M6 4.5h11l-2 3.75 2 3.75H6"/></svg><span>Assisted rollout</span></li>
+      <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12a7.5 7.5 0 0 1 13-5.1L19.5 9M19.5 4.5V9H15M19.5 12a7.5 7.5 0 0 1-13 5.1L4.5 15M4.5 19.5V15H9"/></svg><span>Evolution on demand</span></li>
+    </ul>
+    <p class="speed" data-reveal><span class="live"><i></i></span>On tightly scoped projects, the first release can go live 1 week after scope approval.</p>
   </div>
 </section>
+
+<!-- 8. Contratação -->
 <section class="section" id="contratacao">
   <div class="container">
     <div class="section-head" data-reveal>
       <p class="eyebrow">Engagement model</p>
       <h2>A transparent relationship. A solution built to last.</h2>
-      
     </div>
-    <ul class="grid grid-2" data-reveal><li class="card"><h3>Custom project</h3><p>Scope, milestones, investment and deliverables agreed before work begins.</p></li><li class="card"><h3>Defined ownership</h3><p>Usage rights, source code and intellectual property as set out in the contract.</p></li><li class="card"><h3>No mandatory Arke license</h3><p>There is no Arke licensing fee to use the delivered software, when so contracted. Infrastructure, APIs and third-party services may carry their own costs.</p></li><li class="card"><h3>Support and evolution on demand</h3><p>Optional maintenance, operations support and new features.</p></li></ul>
-    <div class="actions"><a class="btn btn-primary" href="#contato">Request a project assessment</a></div>
+    <ul class="grid-2" data-reveal>
+      <li class="card"><h3>Custom project</h3><p>Scope, milestones, investment and deliverables agreed before work begins.</p></li>
+      <li class="card"><h3>Defined ownership</h3><p>Usage rights, source code and intellectual property as set out in the contract.</p></li>
+      <li class="card"><h3>No mandatory Arke license</h3><p>There is no Arke licensing fee to use the delivered software, when so contracted. Infrastructure and third-party services may carry their own costs.</p></li>
+      <li class="card"><h3>Support and evolution on demand</h3><p>Optional maintenance, operations support and new features.</p></li>
+    </ul>
+    <div class="actions"><a class="btn btn-primary" href="#contato">Book a 30-minute call</a></div>
   </div>
 </section>
+
+<!-- 9. Perguntas -->
+<section class="section" id="perguntas">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Questions</p>
+      <h2>Questions every business owner asks.</h2>
+    </div>
+    <div class="faq" data-reveal>
+      <details><summary>Do I need to understand technology to hire you?<i></i></summary><p>No. You explain your operation your own way, in everyday words. Turning that into a system is our job.</p></details>
+      <details><summary>How much does it cost?<i></i></summary><p>The first call has no cost. The diagnostic costs BRL 2,000, at a fixed price. The project has scope, milestones and investment agreed in writing before it starts, based on what the diagnostic found.</p></details>
+      <details><summary>Will I own the system?<i></i></summary><p>Usage rights, source code and intellectual property are defined by contract. There is no Arke licensing fee to use the delivered software, when so contracted.</p></details>
+      <details><summary>I already use other systems. Will I have to replace everything?<i></i></summary><p>Not necessarily. Often the best solution is to connect the tools your operation already uses and show everything on a single dashboard.</p></details>
+      <details><summary>And after delivery, who takes care of it?<i></i></summary><p>Rollout is assisted: we support the go-live and guide your team. After that, maintenance and new features can be contracted on demand.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Contato -->
 <section class="section section-contact" id="contato">
   <div class="flutes" aria-hidden="true"></div>
   <div class="container contact-grid">
     <div data-reveal>
       <p class="eyebrow">Contact</p>
-      <h2 class="h-xl">Your company&#x27;s next software starts with a conversation.</h2>
-      <p class="lead">Tell us the challenge you need to solve. Our team assesses the context, the technical options and the best path for the project.</p>
-      <p class="step-label">Or reach us directly</p>
+      <h2>Your company's next software starts with a conversation.</h2>
+      <p class="lead">Tell us the challenge you need to solve. The first call takes 30 minutes and has no cost.</p>
+      <p class="label contact-list-label">Or reach us directly</p>
       <ul class="contact-list">
-        <li><a class="contact-link" href="https://wa.me/558599500076" target="_blank" rel="noopener" data-wa><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.500 6.2 6.2l.9-1.300-1.800-1-.8.700c-1-.4-2.300-1.700-2.700-2.700l.7-.800-1-1.800z"/></svg><span>+55 85 9950-0076</span></a></li><li><a class="contact-link" href="https://wa.me/558586081055" target="_blank" rel="noopener" data-wa><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.500 6.2 6.2l.9-1.300-1.800-1-.8.700c-1-.4-2.300-1.700-2.700-2.700l.7-.800-1-1.800z"/></svg><span>+55 85 8608-1055</span></a></li>
-        <li><a class="contact-link" href="mailto:arkeanalytica@gmail.com" aria-label="Email: arkeanalytica@gmail.com"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span>arkeanalytica@gmail.com</span></a></li>
+        <li><a class="contact-link" href="https://wa.me/558599500076" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.5 6.2 6.2l.9-1.3-1.8-1-.8.7c-1-.4-2.3-1.7-2.7-2.7l.7-.8-1-1.8z"/></svg><span>+55 85 9950-0076</span></a></li>
+        <li><a class="contact-link" href="https://wa.me/558586081055" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.5 6.2 6.2l.9-1.3-1.8-1-.8.7c-1-.4-2.3-1.7-2.7-2.7l.7-.8-1-1.8z"/></svg><span>+55 85 8608-1055</span></a></li>
       </ul>
     </div>
-    <form class="form glass" id="contact-form" novalidate data-wa-number="558599500076" data-msg="{&quot;intro&quot;: &quot;Hello, Arke. I&#x27;d like to talk about a project.&quot;, &quot;labels&quot;: {&quot;name&quot;: &quot;Name&quot;, &quot;company&quot;: &quot;Company&quot;, &quot;email&quot;: &quot;Email&quot;, &quot;phone&quot;: &quot;WhatsApp&quot;, &quot;challenge&quot;: &quot;Challenge&quot;, &quot;timeline&quot;: &quot;Desired timeline&quot;, &quot;budget&quot;: &quot;Investment&quot;}, &quot;skip&quot;: &quot;Prefer not to say&quot;}" data-reveal>
+    <form class="form glass" id="contact-form" novalidate data-reveal>
       <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" autocomplete="organization"></div>
       <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
@@ -160,32 +1157,283 @@
       <div class="field field-full"><label for="f-challenge">What challenge do you need to solve?</label><textarea id="f-challenge" name="challenge" rows="4" required></textarea></div>
       <div class="field"><label for="f-timeline">Desired timeline</label><input id="f-timeline" name="timeline"></div>
       <div class="field"><label for="f-budget">Investment range (optional)</label><select id="f-budget" name="budget"><option>Prefer not to say</option><option>Up to BRL 20k</option><option>BRL 20k to 60k</option><option>BRL 60k to 150k</option><option>Above BRL 150k</option></select></div>
-      <div class="hp" aria-hidden="true"><label for="f-site">Website</label><input id="f-site" name="website" tabindex="-1" autocomplete="off"></div>
       <label class="consent field-full"><input type="checkbox" name="consent" required><span>I agree to send this information to Arke Analytica so they can contact me about the project, as described in the <a href="privacy/">privacy policy</a>.</span></label>
+      <div class="hp" aria-hidden="true"><label for="f-site">Website</label><input id="f-site" name="website" tabindex="-1" autocomplete="off"></div>
       <div class="field-full form-end">
-        <button class="btn btn-primary" type="submit">Talk to Arke</button>
+        <button class="btn btn-primary" type="submit">Book the call</button>
         <p class="footnote">Submitting opens WhatsApp with your message ready to send. Nothing is stored on this site.</p>
-        <p class="form-status" role="status" aria-live="polite" data-error="Please fill in the required fields and accept the privacy policy." data-sent="We opened WhatsApp with your message. If it didn&#x27;t open, use one of the numbers on the side."></p>
+        <p class="form-status" role="status" aria-live="polite" data-error="Please fill in the required fields and accept the privacy policy." data-sent="We opened WhatsApp with your message. If it didn't open, use one of the numbers on the side."></p>
       </div>
     </form>
   </div>
 </section>
 </main>
+
 <footer class="site-footer">
   <div class="container footer-row">
     <div>
       <span class="wordmark" aria-label="Arke Analytica"><span>ARKE</span><span class="wordmark-b">ANALYTICA</span></span>
       <p class="footer-desc">Custom Software Development</p>
-      <p class="muted">Custom software development. Software engineering, automation and AI applications.</p>
+      <p class="muted">Custom software development. Software engineering, automation and artificial intelligence applications.</p>
     </div>
     <div class="footer-meta">
       <p>Fortaleza, Brazil</p>
-      <p><a href="mailto:arkeanalytica@gmail.com">arkeanalytica@gmail.com</a></p>
       <p><a href="privacy/">Privacy</a></p>
     </div>
   </div>
   <div class="container footer-legal"><p>© 2026 Arke Analytica. All rights reserved.</p></div>
 </footer>
-<script src="../assets/js/site.js" defer></script>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var doc = document.documentElement;
+  doc.classList.add('js');
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Desenhos gerados (calendário, barras, mapa) ---------- */
+  var cal = document.getElementById('mm-cal');
+  if (cal) { var h = ''; for (var d = 0; d < 35; d++) h += '<i class="' + (d >= 30 ? 'x' : '') + '" style="--i:' + d + '">' + (d < 30 ? d + 1 : '') + '</i>'; cal.innerHTML = h; }
+  var map = document.getElementById('mp-svg');
+  if (map) {
+    var seed = 7; var rnd = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+    var NS = 'http://www.w3.org/2000/svg', out = '';
+    out += '<path class="mp-river" d="M-10 74 C 25 62, 50 88, 86 74 S 140 52, 172 60"/>';
+    for (var x = 6; x < 160; x += 13) { var j = (rnd() - .5) * 4; out += '<line class="mp-st" x1="' + (x + j) + '" y1="-2" x2="' + (x - j) + '" y2="102"/>'; }
+    for (var y = 5; y < 100; y += 11) { var k = (rnd() - .5) * 4; out += '<line class="mp-st" x1="-2" y1="' + (y + k) + '" x2="162" y2="' + (y - k) + '"/>'; }
+    out += '<line class="mp-st av" x1="-5" y1="95" x2="165" y2="8"/><line class="mp-st av" x1="20" y1="-5" x2="70" y2="105"/>';
+    var spotsA = [[52, 38, 1], [110, 64, .75], [124, 24, .45]];
+    var spotsB = [[52, 38, .45], [110, 64, 1], [124, 24, .95]];
+    var val = function (sp, cx, cy) { var s = 0; sp.forEach(function (p) { var dx = cx - p[0], dy = cy - p[1]; s += p[2] * Math.exp(-(dx * dx + dy * dy) / (2 * 17 * 17)); }); return Math.min(1, s); };
+    var ramp = [[29, 63, 143], [57, 123, 255], [146, 117, 232], [231, 236, 250]];
+    var color = function (v) { var t = Math.min(.999, Math.max(0, (v - .12) / .88)) * 3, i = Math.floor(t), f = t - i, a = ramp[i], c = ramp[i + 1]; return 'rgb(' + Math.round(a[0] + (c[0] - a[0]) * f) + ',' + Math.round(a[1] + (c[1] - a[1]) * f) + ',' + Math.round(a[2] + (c[2] - a[2]) * f) + ')'; };
+    ['a', 'b'].forEach(function (g) {
+      out += '<g class="mp-heat ' + g + '">';
+      for (var r = 0; r < 10; r++) for (var c = 0; c < 16; c++) {
+        var v = val(g === 'a' ? spotsA : spotsB, c * 10 + 5, r * 10 + 5);
+        if (v < .12) continue;
+        out += '<rect x="' + (c * 10 + .5) + '" y="' + (r * 10 + .5) + '" width="9" height="9" rx="1" fill="' + color(v) + '" style="--o:' + (0.28 + v * .6).toFixed(2) + ';--d:' + (c + r) + '"/>';
+      }
+      out += '</g>';
+    });
+    var pts = function (cls, n, sp, spread) { var s = ''; for (var i = 0; i < n; i++) { var p = sp[i % sp.length]; var px = p[0] + (rnd() - .5) * spread, py = p[1] + (rnd() - .5) * spread * .8; s += cls === 'h' ? '<circle class="mp-pt h" style="--i:' + i + '" cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="1.4" fill="#E7ECFA"/>' : '<rect class="mp-pt c" style="--i:' + i + '" x="' + px.toFixed(1) + '" y="' + py.toFixed(1) + '" width="2" height="2" fill="#9DBBFF"/>'; } return s; };
+    out += pts('h', 20, [[52, 38], [110, 64], [124, 24]], 34);
+    out += pts('c', 26, [[60, 45], [105, 60], [30, 20], [130, 30]], 40);
+    map.innerHTML = out;
+  }
+
+  document.querySelectorAll('.flutes').forEach(function (f) {
+    var sv = '<svg class="topo" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">';
+    [[1180, 380, 0], [1500, 920, 2.1], [760, 1080, 4.2]].forEach(function (c) {
+      for (var k = 1; k <= 16; k++) {
+        var r = k * 36, d = '';
+        for (var a = 0; a <= 120; a++) {
+          var th = a / 120 * Math.PI * 2;
+          var rr = r * (1 + .13 * Math.sin(3 * th + c[2] + k * .16) + .07 * Math.sin(5 * th - c[2] * 1.3 + k * .1));
+          d += (a ? 'L' : 'M') + (c[0] + rr * Math.cos(th)).toFixed(1) + ' ' + (c[1] + rr * .78 * Math.sin(th)).toFixed(1);
+        }
+        sv += '<path class="' + (k % 5 === 0 ? 'm' : '') + '" d="' + d + 'Z"/>';
+      }
+    });
+    f.insertAdjacentHTML('beforeend', sv + '</svg>');
+  });
+
+  /* ---------- Contadores ---------- */
+  var fmt = function (v, dec) { return dec ? v.toFixed(dec) : String(Math.round(v)); };
+  function countTo(el, instant) {
+    var to = parseFloat(el.getAttribute('data-to')), dec = +el.getAttribute('data-dec') || 0, dur = +el.getAttribute('data-dur') || 900;
+    if (el._raf) cancelAnimationFrame(el._raf);
+    if (instant || RM) { el.textContent = fmt(to, dec); return; }
+    var t0 = performance.now();
+    var tick = function (now) { var p = Math.min(1, (now - t0) / dur); var e = dur > 3000 ? p : 1 - Math.pow(1 - p, 3); el.textContent = fmt(to * e, dec); if (p < 1) el._raf = requestAnimationFrame(tick); };
+    el._raf = requestAnimationFrame(tick);
+  }
+  function applyStep(scene, k, instant) {
+    scene.querySelectorAll('[data-to]').forEach(function (el) { var at = +el.getAttribute('data-at') || 1; if (at === k || (instant && at <= k)) countTo(el, instant); });
+    scene.querySelectorAll('[data-set]').forEach(function (el) {
+      var val = null; el.getAttribute('data-set').split(',').forEach(function (pair) { var p = pair.split(':'); if (+p[0] <= k) val = p[1]; });
+      if (val !== null) el.textContent = val;
+    });
+    /* Rotinas: estado de cada tarefa */
+    if (scene.classList.contains('sc-tasks')) {
+      scene.querySelectorAll('.tk-list li').forEach(function (li, i) { li.classList.toggle('work', k === i + 1); li.classList.toggle('done', k > i + 1); });
+    }
+  }
+  function resetScene(scene) {
+    scene.querySelectorAll('[data-to]').forEach(function (el) { if (el._raf) cancelAnimationFrame(el._raf); el.textContent = '0'; });
+    scene.querySelectorAll('[data-set]').forEach(function (el) { el.textContent = '0'; });
+    scene.querySelectorAll('.tk-list li').forEach(function (li) { li.classList.remove('work', 'done'); });
+  }
+
+  /* ---------- Vitrine do topo: cópia das cenas dos projetos ---------- */
+  var shStage = document.getElementById('sh-stage');
+  var shInfo = [];
+  if (shStage) document.querySelectorAll('#projetos .case').forEach(function (c) {
+    var copy = c.querySelector('.scene').cloneNode(true);
+    copy.setAttribute('data-managed', '');
+    copy.querySelectorAll('[id]').forEach(function (el) { el.removeAttribute('id'); });
+    shStage.appendChild(copy);
+    shInfo.push({ title: c.querySelector('h3').textContent, tag: c.querySelector('.tag').textContent });
+  });
+
+  /* ---------- Cenas: passos com tempo, repetem enquanto visíveis ---------- */
+  var scenes = Array.prototype.slice.call(document.querySelectorAll('[data-scene]'));
+  scenes.forEach(function (sc) {
+    var steps = (sc.getAttribute('data-steps') || '').split(',').map(Number);
+    var hold = +sc.getAttribute('data-hold') || 3500;
+    var once = sc.hasAttribute('data-once') || !!sc.closest('.stats');
+    var timers = [];
+    var clear = function () { timers.forEach(clearTimeout); timers = []; };
+    var setStep = function (k, instant) { for (var i = 1; i <= steps.length; i++) sc.classList.toggle('s' + i, i <= k); applyStep(sc, k, instant); };
+    var start = function (onDone) {
+      clear(); sc.classList.add('no-anim'); sc.classList.remove('is-out'); setStep(0); resetScene(sc); sc.offsetWidth; sc.classList.remove('no-anim');
+      var t = 0;
+      steps.forEach(function (d, i) { t += d; timers.push(setTimeout(function () { setStep(i + 1); }, t)); });
+      if (once) { sc._done = true; return; }
+      t += hold;
+      if (onDone) { timers.push(setTimeout(onDone, t)); return; }
+      timers.push(setTimeout(function () { sc.classList.add('is-out'); }, t));
+      timers.push(setTimeout(function () { start(); }, t + 650));
+    };
+    sc._final = function () { clear(); sc.classList.add('no-anim'); sc.classList.remove('is-out'); setStep(steps.length, true); sc.offsetWidth; sc.classList.remove('no-anim'); sc._done = true; };
+    sc._run = function () { start(); };
+    sc._play = function (cb) { start(cb); };
+    sc._stop = clear;
+    sc._total = steps.reduce(function (a, b) { return a + b; }, 0) + hold;
+  });
+  var free = scenes.filter(function (sc) { return !sc.hasAttribute('data-managed'); });
+  if (RM) {
+    free.forEach(function (sc) { sc._final(); });
+  } else if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var sc = en.target, keep = sc.hasAttribute('data-once') || !!sc.closest('.stats');
+        if (en.isIntersecting) { if (!sc._live && !(sc._done && keep)) { sc._live = true; sc._run(); } }
+        else if (sc._live) { sc._live = false; if (!(sc._done && keep)) sc._stop(); }
+      });
+    }, { threshold: 0.35 });
+    free.forEach(function (sc) { io.observe(sc); });
+  } else { free.forEach(function (sc) { sc._final(); }); }
+
+  /* ---------- Vitrine: troca de projeto sozinha ---------- */
+  var show = document.getElementById('showcase');
+  var shRestart = function () {};
+  if (show && shStage.children.length) {
+    var shScenes = Array.prototype.slice.call(shStage.children);
+    var shBars = show.querySelectorAll('.sh-bars button');
+    var cur = 0, shLive = false;
+    var showOne = function (i) {
+      cur = (i + shScenes.length) % shScenes.length;
+      shScenes.forEach(function (s2, n) { s2.classList.toggle('is-active', n === cur); if (n !== cur) s2._stop(); });
+      show.querySelector('[data-sh-tag]').textContent = shInfo[cur].tag;
+      show.querySelector('[data-sh-title]').textContent = shInfo[cur].title;
+      show.querySelector('[data-sh-n]').textContent = '0' + (cur + 1);
+      shBars.forEach(function (b) { b.style.setProperty('--t', '0s'); b.style.setProperty('--p', '0'); });
+      show.offsetWidth;
+      shBars.forEach(function (b, n) { b.style.setProperty('--p', n < cur ? '1' : '0'); b.setAttribute('aria-current', String(n === cur)); });
+      var sc = shScenes[cur];
+      if (RM || !shLive) { sc._final(); shBars[cur].style.setProperty('--p', '1'); return; }
+      sc._play(function () { showOne(cur + 1); });
+      requestAnimationFrame(function () { requestAnimationFrame(function () { shBars[cur].style.setProperty('--t', sc._total + 'ms'); shBars[cur].style.setProperty('--p', '1'); }); });
+    };
+    shBars.forEach(function (b, n) { b.addEventListener('click', function () { showOne(n); }); });
+    show.querySelector('[data-sh-go]').addEventListener('click', function () {
+      var car = document.querySelector('[data-carousel]'), target = cur;
+      setTimeout(function () { car._go(target); }, 500);
+    });
+    if (!RM && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && !shLive) { shLive = true; showOne(cur); }
+          else if (!en.isIntersecting && shLive) { shLive = false; shScenes[cur]._stop(); }
+        });
+      }, { threshold: 0.3 }).observe(show);
+    } else { showOne(0); }
+    shRestart = function () { if (!RM) shLive = true; showOne(0); };
+  }
+
+  /* ---------- Entrada das seções e linha do tempo ---------- */
+  var reveal = document.querySelectorAll('[data-reveal]');
+  var tl = document.querySelectorAll('.tl > li');
+  if (RM || !('IntersectionObserver' in window)) {
+    reveal.forEach(function (el) { el.classList.add('is-in'); });
+    tl.forEach(function (el) { el.classList.add('on'); });
+  } else {
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add(en.target.matches('.tl > li') ? 'on' : 'is-in'); io2.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    reveal.forEach(function (el) { io2.observe(el); });
+    tl.forEach(function (el, i) { el.style.transitionDelay = (i * 80) + 'ms'; io2.observe(el); });
+  }
+
+  /* ---------- Cabeçalho e menu ---------- */
+  var head = document.querySelector('.site-header');
+  var onScroll = function () { head.classList.toggle('is-scrolled', window.scrollY > 24); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+  var toggle = document.querySelector('.menu-toggle'), panel = document.getElementById('menu-panel');
+  var setOpen = function (o) { panel.classList.toggle('is-open', o); toggle.setAttribute('aria-expanded', String(o)); };
+  toggle.addEventListener('click', function () { setOpen(!panel.classList.contains('is-open')); });
+  panel.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+
+  /* ---------- Carrossel de projetos ---------- */
+  document.querySelectorAll('[data-carousel]').forEach(function (root) {
+    var track = root.querySelector('.carousel-track');
+    var slides = Array.prototype.slice.call(track.children);
+    var dots = root.querySelectorAll('.carousel-dot');
+    var prev = root.querySelector('[data-prev]'), next = root.querySelector('[data-next]'), current = root.querySelector('[data-current]');
+    var index = 0;
+    var go = function (i) { i = Math.max(0, Math.min(slides.length - 1, i)); track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: RM ? 'auto' : 'smooth' }); };
+    var sync = function () {
+      var i = Math.round(track.scrollLeft / (slides[0].offsetWidth + 14));
+      index = Math.max(0, Math.min(slides.length - 1, i));
+      dots.forEach(function (d, n) { d.setAttribute('aria-current', String(n === index)); });
+      current.textContent = '0' + (index + 1);
+      prev.disabled = index === 0; next.disabled = index === slides.length - 1;
+      slides.forEach(function (s, n) { s.toggleAttribute('inert', n !== index); });
+    };
+    dots.forEach(function (d, n) { d.addEventListener('click', function () { go(n); }); });
+    prev.addEventListener('click', function () { go(index - 1); });
+    next.addEventListener('click', function () { go(index + 1); });
+    track.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1); } });
+    var t; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(sync, 60); }, { passive: true });
+    window.addEventListener('resize', sync);
+    root._sync = sync; root._go = go;
+    sync();
+  });
+
+  /* ---------- Perguntas: abre uma por vez ---------- */
+  var faqs = document.querySelectorAll('.faq details');
+  faqs.forEach(function (d) { d.addEventListener('toggle', function () { if (d.open) faqs.forEach(function (o) { if (o !== d) o.open = false; }); }); });
+
+  /* ---------- Formulário: monta a mensagem e abre o WhatsApp. Nada é enviado a servidor. ---------- */
+  var form = document.getElementById('contact-form');
+  var status = form.querySelector('.form-status');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (form.elements.website.value) return;
+    form.classList.add('was-validated');
+    if (!form.checkValidity()) {
+      status.textContent = status.getAttribute('data-error'); status.className = 'form-status is-error';
+      var bad = form.querySelector(':invalid'); if (bad) bad.focus(); return;
+    }
+    var labels = { name: 'Name', company: 'Company', email: 'Email', phone: 'WhatsApp', challenge: 'Challenge', timeline: 'Desired timeline', budget: 'Investment' };
+    var lines = ['Hello, Arke. I\'d like to talk about a project.', ''];
+    Object.keys(labels).forEach(function (k) {
+      var v = (form.elements[k].value || '').trim();
+      if (!v || (k === 'budget' && v === 'Prefer not to say')) return;
+      lines.push(labels[k] + ': ' + v);
+    });
+    status.textContent = status.getAttribute('data-sent'); status.className = 'form-status is-ok';
+    window.open('https://wa.me/558599500076?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+  });
+
+  /* ---------- Idioma: guarda a escolha para o redirecionamento da raiz ---------- */
+  var remember = function (l) { try { localStorage.setItem('arke-lang', l); } catch (err) { /* sem storage */ } };
+  remember('en');
+  document.querySelectorAll('[data-lang]').forEach(function (a) { a.addEventListener('click', function () { remember(a.getAttribute('data-lang')); }); });
+})();
+</script>
 </body>
 </html>

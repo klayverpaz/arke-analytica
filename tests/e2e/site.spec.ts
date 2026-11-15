@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// pt/index.html é a página nova feita à mão (15/11/2026); en/ ainda é gerada pelo build.py.
+// pt/ e en/ são as páginas novas feitas à mão (15/11/2026); o build.py não as regenera.
 const langs = [
   {
     code: 'pt', h1: 'Seu negócio é único. Seu software também deveria ser.', badge: null, privacy: 'privacidade',
@@ -8,9 +8,9 @@ const langs = [
     solutions: 3, cases: 5, steps: '.tl > li',
   },
   {
-    code: 'en', h1: 'Your business is unique. Your software should be, too.', badge: '1 week', privacy: 'privacy',
-    sections: ['autoridade', 'solucoes', 'projetos', 'segmentos', 'desafios', 'metodologia', 'contratacao', 'contato'],
-    solutions: 6, cases: 4, steps: '.step',
+    code: 'en', h1: 'Your business is unique. Your software should be, too.', badge: null, privacy: 'privacy',
+    sections: ['autoridade', 'solucoes', 'projetos', 'desafios', 'diagnostico', 'metodologia', 'contratacao', 'perguntas', 'contato'],
+    solutions: 3, cases: 5, steps: '.tl > li',
   },
 ];
 
@@ -83,19 +83,20 @@ for (const l of langs) {
   });
 }
 
-test.describe('home pt: página nova', () => {
+const roadTitle: Record<string, string> = { pt: 'Inspeção de rodovias por vídeo', en: 'Road inspection from video' };
+for (const code of ['pt', 'en']) test.describe(`home ${code}: página nova`, () => {
   test('vitrine do topo troca de projeto pelas barrinhas e leva ao carrossel', async ({ page }) => {
-    await page.goto('/pt/');
+    await page.goto(`/${code}/`);
     await expect(page.locator('#sh-stage .scene')).toHaveCount(5);
     await page.locator('.sh-bars button').nth(4).click();
     await expect(page.locator('[data-sh-n]')).toHaveText('05');
-    await expect(page.locator('[data-sh-title]')).toHaveText('Inspeção de rodovias por vídeo');
+    await expect(page.locator('[data-sh-title]')).toHaveText(roadTitle[code]);
     await page.locator('[data-sh-go]').click();
     await expect(page.locator('#projetos [data-current]')).toHaveText('05');
   });
 
   test('carrossel, perguntas e menu', async ({ page }) => {
-    await page.goto('/pt/');
+    await page.goto(`/${code}/`);
     await page.locator('#projetos [data-next]').click();
     await expect(page.locator('#projetos [data-current]')).toHaveText('02');
     const faq = page.locator('.faq details');
@@ -115,7 +116,7 @@ test.describe('home pt: página nova', () => {
   test('sem animação, tudo aparece no estado final', async ({ browser }) => {
     const ctx = await browser.newContext({ reducedMotion: 'reduce' });
     const page = await ctx.newPage();
-    await page.goto('/pt/');
+    await page.goto(`/${code}/`);
     await expect(page.locator('.stats [data-to="30"]')).toHaveText('30');
     await expect(page.locator('#projetos .mo-road [data-set="3:1,5:2"]')).toHaveText('2');
     await ctx.close();

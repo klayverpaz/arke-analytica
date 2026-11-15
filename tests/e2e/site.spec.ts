@@ -1,8 +1,17 @@
 import { test, expect } from '@playwright/test';
 
+// pt/index.html é a página nova feita à mão (15/11/2026); en/ ainda é gerada pelo build.py.
 const langs = [
-  { code: 'pt', h1: 'Seu negócio é único. Seu software também deveria ser.', badge: 'até 1 semana', privacy: 'privacidade' },
-  { code: 'en', h1: 'Your business is unique. Your software should be, too.', badge: '1 week', privacy: 'privacy' },
+  {
+    code: 'pt', h1: 'Seu negócio é único. Seu software também deveria ser.', badge: null, privacy: 'privacidade',
+    sections: ['autoridade', 'solucoes', 'projetos', 'desafios', 'diagnostico', 'metodologia', 'contratacao', 'perguntas', 'contato'],
+    solutions: 3, cases: 5, steps: '.tl > li',
+  },
+  {
+    code: 'en', h1: 'Your business is unique. Your software should be, too.', badge: '1 week', privacy: 'privacy',
+    sections: ['autoridade', 'solucoes', 'projetos', 'segmentos', 'desafios', 'metodologia', 'contratacao', 'contato'],
+    solutions: 6, cases: 4, steps: '.step',
+  },
 ];
 
 for (const l of langs) {
@@ -12,14 +21,14 @@ for (const l of langs) {
       page.on('pageerror', (e) => errors.push(e.message));
       await page.goto(`/${l.code}/`);
       await expect(page.locator('h1')).toHaveText(l.h1);
-      await expect(page.locator('.badge')).toContainText(l.badge);
-      for (const id of ['autoridade', 'solucoes', 'projetos', 'segmentos', 'desafios', 'metodologia', 'contratacao', 'contato']) {
+      if (l.badge) await expect(page.locator('.badge')).toContainText(l.badge);
+      for (const id of l.sections) {
         await expect(page.locator(`#${id}`)).toBeVisible();
       }
       await expect(page.locator('.stat')).toHaveCount(4);
-      await expect(page.locator('#solucoes .card')).toHaveCount(6);
-      await expect(page.locator('.case')).toHaveCount(4);
-      await expect(page.locator('.step')).toHaveCount(6);
+      await expect(page.locator('#solucoes .card')).toHaveCount(l.solutions);
+      await expect(page.locator('#projetos .case')).toHaveCount(l.cases);
+      await expect(page.locator(l.steps)).toHaveCount(6);
       // sem depoimentos, fundadores, logos ou placeholders
       const text = await page.locator('body').innerText();
       expect(text).not.toMatch(/\[(MARCA|PROJETO|FUNDADOR|Nome)/);
@@ -73,6 +82,45 @@ for (const l of langs) {
     });
   });
 }
+
+test.describe('home pt: página nova', () => {
+  test('vitrine do topo troca de projeto pelas barrinhas e leva ao carrossel', async ({ page }) => {
+    await page.goto('/pt/');
+    await expect(page.locator('#sh-stage .scene')).toHaveCount(5);
+    await page.locator('.sh-bars button').nth(4).click();
+    await expect(page.locator('[data-sh-n]')).toHaveText('05');
+    await expect(page.locator('[data-sh-title]')).toHaveText('Inspeção de rodovias por vídeo');
+    await page.locator('[data-sh-go]').click();
+    await expect(page.locator('#projetos [data-current]')).toHaveText('05');
+  });
+
+  test('carrossel, perguntas e menu', async ({ page }) => {
+    await page.goto('/pt/');
+    await page.locator('#projetos [data-next]').click();
+    await expect(page.locator('#projetos [data-current]')).toHaveText('02');
+    const faq = page.locator('.faq details');
+    await faq.nth(1).locator('summary').click();
+    await faq.nth(2).locator('summary').click();
+    await expect(faq.nth(1)).not.toHaveAttribute('open', '');
+    await expect(faq.nth(2)).toHaveAttribute('open', '');
+    const toggle = page.locator('.menu-toggle');
+    if (await toggle.isVisible()) {
+      await toggle.click();
+      await expect(page.locator('#menu-panel')).toBeVisible();
+      await page.locator('#menu-panel a[href="#diagnostico"]').click();
+      await expect(page.locator('#menu-panel')).toBeHidden();
+    }
+  });
+
+  test('sem animação, tudo aparece no estado final', async ({ browser }) => {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    await page.goto('/pt/');
+    await expect(page.locator('.stats [data-to="30"]')).toHaveText('30');
+    await expect(page.locator('#projetos .mo-road [data-set="3:1,5:2"]')).toHaveText('2');
+    await ctx.close();
+  });
+});
 
 test('root redirects by saved language', async ({ page }) => {
   await page.goto('/en/');

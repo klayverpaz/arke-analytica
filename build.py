@@ -361,6 +361,10 @@ def render_root():
 """
 
 
+# Páginas com este marcador foram feitas à mão (pt/index.html, desde 15/11/2026) e não são regeneradas.
+HAND_MADE = "arke: pagina-feita-a-mao"
+
+
 def write(rel, text):
     path = ROOT / rel
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -373,7 +377,11 @@ def main():
     en = json.loads((ROOT / "content/en.json").read_text(encoding="utf-8"))
     write("index.html", render_root())
     for c, other in ((pt, en), (en, pt)):
-        write(f"{c['code']}/index.html", render_home(c))
+        home = ROOT / f"{c['code']}/index.html"
+        if home.exists() and HAND_MADE in home.read_text(encoding="utf-8"):
+            print("skip", f"{c['code']}/index.html", "(página feita à mão)")
+        else:
+            write(f"{c['code']}/index.html", render_home(c))
         write(f"{c['code']}/{c['privacy']['slug']}/index.html", render_privacy(c, other))
     urls = ["pt/", "en/", f"pt/{pt['privacy']['slug']}/", f"en/{en['privacy']['slug']}/"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

@@ -261,13 +261,33 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
 .win-title { font-weight: 500; font-size: 1.05em; opacity: 0; transition: opacity .4s ease; display: flex; justify-content: space-between; gap: 1em; }
 .win-title small { color: var(--text-secondary); font-weight: 400; font-size: .85em; }
 .sc-build.s2 .win-title { opacity: 1; }
-.win-rows li { display: flex; align-items: center; justify-content: space-between; gap: .8em; padding: .5em .7em; border-radius: .55em; background: rgba(255,255,255,.05); font-size: .9em; opacity: 0; transform: translateX(1em); transition: opacity .4s ease, transform .5s var(--out); margin-bottom: .45em; }
-.win-rows li span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.win-rows em { flex: none; font-size: .82em; padding: .15em .65em; border-radius: 99px; background: rgba(255,255,255,.08); color: var(--text-secondary); transition: background .4s ease, color .4s ease; }
-.sc-build.s3 .r1, .sc-build.s4 .r2, .sc-build.s5 .r3, .sc-build.s6 .r4 { opacity: 1; transform: none; }
-.sc-build.s7 .win-rows em.ok { background: rgba(91,214,138,.14); color: var(--ok-soft); }
-.sc-build.s7 .win-rows em.at { background: rgba(255,201,138,.14); color: var(--warn); }
-.sc-build.s7 .win-rows em.lo { background: rgba(169,195,234,.14); color: var(--brand-link); }
+/* Kanban do funil de vendas: cartões andam de coluna em coluna */
+.sc-kanban .win-body { grid-template-columns: 13% 1fr; }
+.sc-kanban .win-main { display: flex; flex-direction: column; gap: .7em; padding: .8em .9em .9em; }
+.sc-kanban .win-title small b { color: var(--ok-soft); font-weight: 500; font-variant-numeric: tabular-nums; }
+.kb { position: relative; flex: 1; min-height: 0; }
+.kb-cols { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .4em; }
+.kb-col { border-radius: .55em; background: rgba(255,255,255,.035); padding: .5em .45em 0; opacity: 0; transform: translateY(.4em); transition: opacity .4s ease, transform .5s var(--out); transition-delay: calc(var(--i) * 80ms); }
+.sc-kanban.s2 .kb-col { opacity: 1; transform: none; }
+.kb-col p { display: flex; justify-content: space-between; gap: .3em; font-size: .72em; color: var(--text-secondary); white-space: nowrap; }
+.kb-col p span { overflow: hidden; text-overflow: ellipsis; }
+.kb-col p b { font-weight: 500; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.kb-col i { display: block; width: var(--w); height: .22em; margin-top: .45em; border-radius: 99px; background: linear-gradient(90deg, var(--brand-strong), var(--brand-accent)); transform: scaleX(0); transform-origin: left; transition: transform .7s var(--out) .25s; }
+.sc-kanban.s2 .kb-col i { transform: none; }
+.kb-card { --c: 0; --r: 0; position: absolute; left: calc(var(--c) * (25% + .1em) + .3em); width: calc(25% - .9em); top: calc(2.35em + var(--r) * 3.1em); height: 2.75em; display: grid; align-content: center; gap: .1em; padding: 0 .5em; border-radius: .45em; border: 1px solid var(--line); background: #18223f; opacity: 0; transform: translateY(.5em); transition: opacity .35s ease calc(var(--i) * 70ms), transform .45s var(--out) calc(var(--i) * 70ms), left .8s var(--out), top .8s var(--out), border-color .4s ease, box-shadow .4s ease; }
+.kb-card b { font-size: .74em; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kb-card span { font-size: .68em; color: var(--text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; transition: color .4s ease; }
+.sc-kanban.s3 .kb-card:not(.kH), .sc-kanban.s7 .kH { opacity: 1; transform: none; }
+.kH b::before { content: ""; display: inline-block; width: .5em; height: .5em; margin-right: .35em; border-radius: 50%; background: var(--brand-link); vertical-align: .05em; }
+.kA { --i: 0; } .kB { --i: 1; --r: 1; } .kC { --i: 2; --r: 2; }
+.kD { --i: 3; --c: 1; } .kE { --i: 4; --c: 1; --r: 1; }
+.kF { --i: 5; --c: 2; } .kG { --i: 6; --c: 3; } .kH { --i: 0; --r: 2; }
+.sc-kanban.s4 .kF { --c: 3; --r: 1; }
+.sc-kanban.s5 .kD { --c: 2; } .sc-kanban.s5 .kE { --r: 0; }
+.sc-kanban.s6 .kA { --c: 1; --r: 1; } .sc-kanban.s6 .kB { --r: 0; } .sc-kanban.s6 .kC { --r: 1; }
+.sc-kanban.s4:not(.s5) .kF, .sc-kanban.s5:not(.s6) .kD, .sc-kanban.s6:not(.s7) .kA, .sc-kanban.s7 .kH { z-index: 2; border-color: rgba(157,187,255,.7); box-shadow: 0 .6em 1.4em -.5em rgba(57,123,255,.6); }
+.kG, .sc-kanban.s4 .kF { border-color: rgba(91,214,138,.35); }
+.kG span, .sc-kanban.s4 .kF span { color: var(--ok-soft); }
 
 /* Cena: rotinas que se resolvem sozinhas */
 .sc-tasks .stage { padding: 7% 7%; display: flex; flex-direction: column; gap: 1em; }
@@ -365,30 +385,32 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
 .crm-msg.tagm { align-self: stretch; max-width: none; text-align: center; border-radius: 99px; background: rgba(91,214,138,.14); color: var(--ok-soft); border: 1px solid rgba(91,214,138,.35); font-size: .84em; }
 .mo-crm.s1 .m1, .mo-crm.s2 .m2, .mo-crm.s3 .m3, .mo-crm.s4 .m4 { opacity: 1; transform: none; }
 
-/* Cena: cronograma da obra */
-.mo-gantt .stage { display: flex; flex-direction: column; gap: 1.4em; padding: 1.8em 1.6em 2em; --fs: clamp(9px, 3cqi, 13.5px); }
-.g-head { display: flex; align-items: center; justify-content: space-between; gap: 1em; font-weight: 500; font-size: 1.05em; flex-wrap: wrap; }
-.g-chip { padding: .35em .85em; border-radius: 99px; font-size: .84em; color: var(--warn); background: rgba(255,170,80,.12); border: 1px solid rgba(255,170,80,.4); opacity: 0; transform: translateY(-.3em); transition: opacity .4s ease, transform .4s ease; }
-.mo-gantt.s2 .g-chip { opacity: 1; transform: none; }
-.g-body { flex: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1em; }
-.g-labels, .g-bars { display: grid; grid-auto-rows: 1fr; gap: .7em; height: 100%; }
-.g-labels li { display: flex; align-items: center; color: var(--text-secondary); font-size: .95em; white-space: nowrap; transition: color .4s ease; }
-.mo-gantt.s3 .g-labels li.late { color: var(--warn); }
-.g-track { position: relative; background: repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 1px, transparent 1px calc(100% / 8)); border-left: 1px solid var(--line-strong); }
-.g-bars { position: absolute; inset: 0; }
-.g-bars li { position: relative; }
-.g-bars i { position: absolute; top: 18%; bottom: 18%; left: var(--s); width: var(--w); border-radius: .5em; }
-.g-base i { background: rgba(169,195,234,.16); border: 1px solid rgba(169,195,234,.25); }
-.g-done { clip-path: inset(0 98% 0 0); transition: clip-path 3.2s linear; }
-.mo-gantt.s1 .g-done { clip-path: inset(0 36% 0 0); }
-.g-done i { background: linear-gradient(90deg, var(--brand-strong), var(--brand-primary)); }
-.g-bars i.late { transition: transform .9s cubic-bezier(.65,0,.35,1), background .5s ease, border-color .5s ease; }
-.mo-gantt.s2 .g-bars i.late { transform: translateX(28%); }
-.mo-gantt.s2 .g-base i.late { background: rgba(255,170,80,.16); border-color: rgba(255,170,80,.6); }
-.g-today { position: absolute; top: -.4em; bottom: -.4em; left: 2%; width: 2px; background: var(--text-primary); box-shadow: 0 0 1em rgba(169,195,234,.8); transition: left 3.2s linear; }
-.mo-gantt.s1 .g-today { left: 64%; }
-.g-today b { position: absolute; bottom: 100%; left: 50%; transform: translate(-50%, -.3em); padding: .15em .55em; border-radius: 99px; background: var(--text-primary); color: #0A1230; font-size: .78em; font-weight: 600; white-space: nowrap; }
-
+/* Cena: gestão das obras, com alerta de atraso e o porquê */
+.mo-site .stage { display: flex; flex-direction: column; justify-content: center; gap: .9em; padding: 1.5em 1.6em; --fs: clamp(9px, 3cqi, 13.5px); }
+.ob-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1em; font-weight: 500; font-size: 1.05em; opacity: 0; transition: opacity .4s ease; }
+.ob-head small { font-weight: 400; font-size: .78em; color: var(--text-secondary); white-space: nowrap; }
+.mo-site.s1 .ob-head { opacity: 1; }
+.ob-list { display: grid; gap: .45em; }
+.ob-list > li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .4em 1em; padding: .55em .8em; border-radius: .6em; border: 1px solid var(--line); background: rgba(255,255,255,.04); opacity: 0; transform: translateY(.5em); transition: opacity .4s ease, transform .5s var(--out), border-color .5s ease, background .5s ease; transition-delay: calc(var(--i) * 120ms); }
+.mo-site.s1 .ob-list > li { opacity: 1; transform: none; }
+.ob-list b { font-weight: 500; font-size: .92em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ob-list em { font-size: .78em; padding: .15em .7em; border-radius: 99px; background: rgba(91,214,138,.14); color: var(--ok-soft); white-space: nowrap; transition: background .5s ease, color .5s ease; }
+.ob-bar { grid-column: 1 / -1; display: flex; align-items: center; gap: .7em; font-size: .74em; color: var(--text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ob-bar i { flex: 1; height: .45em; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; }
+.ob-bar i::before { content: ""; display: block; height: 100%; width: var(--p); border-radius: inherit; background: linear-gradient(90deg, var(--brand-strong), var(--brand-primary)); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--out) .3s; }
+.mo-site.s1 .ob-bar i::before { transform: none; }
+.mo-site.s2 .ob-list .risk { border-color: rgba(255,170,80,.55); background: rgba(255,170,80,.07); }
+.mo-site.s2 .ob-list .risk em { background: rgba(255,170,80,.14); color: var(--warn); }
+.ob-card { display: grid; gap: .5em; padding: .8em .95em; border-radius: .75em; border: 1px solid var(--line-strong); background: rgba(6,10,20,.5); opacity: 0; transform: translateY(.8em); transition: opacity .5s ease, transform .6s var(--out); }
+.mo-site.s3 .ob-card { opacity: 1; transform: none; }
+.ob-card p { display: flex; align-items: center; gap: .5em; font-size: .9em; font-weight: 500; }
+.ob-card p svg { width: 1.1em; height: 1.1em; flex: none; color: var(--brand-link); }
+.ob-card ul { display: grid; gap: .35em; }
+.ob-card li { display: flex; align-items: baseline; gap: .55em; font-size: .82em; color: var(--text-secondary); opacity: 0; transform: translateX(.5em); transition: opacity .4s ease, transform .5s var(--out); }
+.ob-card li::before { content: ""; width: .45em; height: .45em; border-radius: 50%; background: var(--warn); flex: none; transform: translateY(-.05em); }
+.ob-card li.ob-do { color: var(--ok-soft); }
+.ob-card li.ob-do::before { background: var(--ok); }
+.mo-site.s3 .ob-card li:nth-child(1), .mo-site.s4 .ob-card li:nth-child(2), .mo-site.s5 .ob-card li:nth-child(3) { opacity: 1; transform: none; }
 /* Cena: um mês vira 40 minutos */
 .mo-month .stage { display: grid; grid-template-rows: 1fr 1fr; gap: 1em; padding: 1.2em; --fs: clamp(9.5px, 3.2cqi, 14px); }
 .mm-box { display: flex; flex-direction: column; gap: .7em; padding: 1em; border-radius: .9em; border: 1px solid var(--line); background: rgba(255,255,255,.04); transition: opacity .8s ease; min-height: 0; }
@@ -663,7 +685,7 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
   .split .section-head { position: sticky; top: 120px; margin-bottom: 0; }
   .diag { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
   .sc-doc { aspect-ratio: 1 / 1.05; }
-  .tl { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+  .tl { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
   .tl li { grid-template-columns: 1fr; padding-bottom: 0; align-content: start; }
   .tl .n { grid-row: auto; margin-bottom: 18px; }
   .tl li::before, .tl li::after { left: 46px; right: -18px; top: 17.5px; bottom: auto; width: auto; height: 1px; }
@@ -701,7 +723,7 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
       <a href="#projetos">Projetos</a>
       <a href="#diagnostico">Diagnóstico</a>
       <a href="#metodologia">Como trabalhamos</a>
-      <a class="btn btn-primary" href="#contato">Marcar conversa de 30 minutos</a>
+      <a class="btn btn-primary" href="#contato">Marcar conversa</a>
     </div>
   </div>
 </header>
@@ -717,7 +739,7 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
       <h1><span>Seu negócio é único.</span> <span>Seu software também deveria ser.</span></h1>
       <p class="lead">Entendemos a complexidade da sua operação e desenvolvemos soluções tecnológicas que se adaptam aos seus processos, e não o contrário.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#contato">Marcar conversa de 30 minutos <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-primary" href="#contato">Marcar conversa <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
         <a class="btn btn-text" href="#projetos">Ver projetos <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
       </div>
       <p class="hero-note">Sem custo e sem compromisso.</p>
@@ -770,20 +792,30 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
     <ul class="solutions">
       <li class="card solution" data-reveal>
         <div class="scene-wrap">
-          <div class="scene sc-build" data-scene data-steps="400,600,300,250,250,250,600" data-hold="3200" aria-hidden="true">
+          <div class="scene sc-build sc-kanban" data-scene data-steps="400,700,600,1300,1300,1300,1100" data-hold="3400" aria-hidden="true">
             <div class="stage">
               <div class="win">
                 <div class="win-bar"><i></i><i></i><i></i><span>Sistema da sua empresa</span></div>
                 <div class="win-body">
                   <aside class="win-side"><b></b><i></i><i></i><i></i><i></i></aside>
                   <div class="win-main">
-                    <p class="win-title">Em andamento <small>hoje</small></p>
-                    <ul class="win-rows">
-                      <li class="r1"><span>Contrato 0142 · Aurora</span><em class="ok">Em dia</em></li>
-                      <li class="r2"><span>Pedido 0388 · Loja Centro</span><em class="at">Atenção</em></li>
-                      <li class="r3"><span>Obra Galpão Norte</span><em class="ok">Em dia</em></li>
-                      <li class="r4"><span>Atendimento 0911</span><em class="lo">Resolvido</em></li>
-                    </ul>
+                    <p class="win-title">Funil de vendas <small>Ganho no mês <b>R$ <span data-set="2:31,4:79">0</span> mil</b></small></p>
+                    <div class="kb">
+                    <div class="kb-cols">
+                      <div class="kb-col" style="--i:0;--w:100%"><p><span>Contato</span><b data-set="2:3,6:2,7:3">0</b></p><i></i></div>
+                      <div class="kb-col" style="--i:1;--w:72%"><p><span>Proposta</span><b data-set="2:2,5:1,6:2">0</b></p><i></i></div>
+                      <div class="kb-col" style="--i:2;--w:48%"><p><span>Negociação</span><b data-set="2:1,4:0,5:1">0</b></p><i></i></div>
+                      <div class="kb-col" style="--i:3;--w:30%"><p><span>Fechado</span><b data-set="2:1,4:2">0</b></p><i></i></div>
+                    </div>
+                    <div class="kb-card kA"><b>Clínica Sol</b><span>R$ 18 mil</span></div>
+                    <div class="kb-card kB"><b>Loja Centro</b><span>R$ 9 mil</span></div>
+                    <div class="kb-card kC"><b>Aurora</b><span>R$ 42 mil</span></div>
+                    <div class="kb-card kD"><b>Grupo Vale</b><span>R$ 65 mil</span></div>
+                    <div class="kb-card kE"><b>Obra Norte</b><span>R$ 27 mil</span></div>
+                    <div class="kb-card kF"><b>Café Azul</b><span>R$ 48 mil</span></div>
+                    <div class="kb-card kG"><b>Studio Lima</b><span>R$ 31 mil</span></div>
+                    <div class="kb-card kH"><b>Hotel Mar</b><span>R$ 22 mil</span></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -899,15 +931,16 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
         </article>
 
         <article class="case" aria-label="2 de 5">
-          <div class="case-media"><div class="scene mo-gantt" data-scene data-steps="600,3300,600" data-hold="3600" aria-hidden="true"><div class="stage">
-            <p class="g-head"><span>Cronograma da obra</span><span class="g-chip">Atraso previsto: +6 dias</span></p>
-            <div class="g-body">
-              <ul class="g-labels"><li>Fundação</li><li>Estrutura</li><li>Alvenaria</li><li class="late">Instalações</li><li>Acabamento</li></ul>
-              <div class="g-track">
-                <ul class="g-bars g-base"><li><i style="--s:0%;--w:22%"></i></li><li><i style="--s:16%;--w:30%"></i></li><li><i style="--s:38%;--w:26%"></i></li><li><i class="late" style="--s:52%;--w:28%"></i></li><li><i style="--s:72%;--w:26%"></i></li></ul>
-                <ul class="g-bars g-done"><li><i style="--s:0%;--w:22%"></i></li><li><i style="--s:16%;--w:30%"></i></li><li><i style="--s:38%;--w:26%"></i></li><li><i class="late" style="--s:52%;--w:28%"></i></li><li><i style="--s:72%;--w:26%"></i></li></ul>
-                <span class="g-today"><b>Hoje</b></span>
-              </div>
+          <div class="case-media"><div class="scene mo-site" data-scene data-steps="500,1500,1000,700,900" data-hold="3600" aria-hidden="true"><div class="stage">
+            <p class="ob-head"><span>Obras em andamento</span><small>Atualizado hoje</small></p>
+            <ul class="ob-list">
+              <li class="risk" style="--i:0"><b>Residencial Aurora</b><em data-set="1:No prazo,2:Risco · +6 dias">0</em><span class="ob-bar"><i style="--p:62%"></i>Avanço 62%</span></li>
+              <li style="--i:1"><b>Galpão Norte</b><em>No prazo</em><span class="ob-bar"><i style="--p:48%"></i>Avanço 48%</span></li>
+              <li style="--i:2"><b>Clínica Centro</b><em>No prazo</em><span class="ob-bar"><i style="--p:81%"></i>Avanço 81%</span></li>
+            </ul>
+            <div class="ob-card">
+              <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l1.9 5.1a2 2 0 0 0 1.2 1.2l5.1 1.9-5.1 1.9a2 2 0 0 0-1.2 1.2L12 19.9l-1.9-5.1a2 2 0 0 0-1.2-1.2l-5.1-1.9 5.1-1.9a2 2 0 0 0 1.2-1.2z"/></svg>Por que a Aurora pode atrasar</p>
+              <ul><li>Entrega do aço 4 dias atrasada</li><li>Equipe 20% abaixo do previsto</li><li class="ob-do">Sugestão: remanejar 4 pessoas do Galpão Norte</li></ul>
             </div>
           </div></div></div>
           <div class="case-body">
@@ -1051,7 +1084,7 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
           <li class="p3"><span class="n">3</span><h3>Projeto com escopo fechado</h3><span class="price">Preço definido antes de começar</span><p class="t">O que o diagnóstico recomendou, construído com uma entrega para você ver a cada 2 semanas.</p></li>
         </ol>
         <p class="footnote diag-pay">Pagamento do diagnóstico: metade na assinatura, metade na entrega do documento.</p>
-        <div class="actions"><a class="btn btn-primary" href="#contato">Marcar conversa de 30 minutos</a></div>
+        <div class="actions"><a class="btn btn-primary" href="#contato">Marcar conversa</a></div>
       </div>
       <div class="scene-wrap" data-reveal>
         <div class="scene sc-doc" data-scene data-steps="400,700,600,600,900,700" data-hold="3800" aria-hidden="true">
@@ -1082,12 +1115,10 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
       <h2>Rigor no processo. Clareza em cada entrega.</h2>
     </div>
     <ol class="tl">
-      <li><span class="n">01</span><h3>Imersão e diagnóstico</h3><p class="t">Entendimento do negócio, dos processos, dos usuários e das limitações existentes.</p><ul><li>Mapa do processo atual</li><li>Limitações e prioridades</li></ul></li>
-      <li><span class="n">02</span><h3>Arquitetura e desenho</h3><p class="t">Solução proposta, fluxos, prioridades e requisitos.</p><ul><li>Desenho da solução</li><li>Fluxos e requisitos</li></ul></li>
-      <li><span class="n">03</span><h3>Escopo e validação</h3><p class="t">Entregáveis, critérios de aceite, cronograma e investimento.</p><ul><li>Escopo por escrito</li><li>Critérios de aceite</li><li>Cronograma e investimento</li></ul></li>
-      <li><span class="n">04</span><h3>Engenharia e testes</h3><p class="t">Desenvolvimento, validações e acompanhamento dos marcos.</p><ul><li>Versões por marco</li><li>Validações com a equipe</li></ul></li>
-      <li><span class="n">05</span><h3>Implantação assistida</h3><p class="t">Entrada em operação, orientação e ajustes contratados.</p><ul><li>Sistema em operação</li><li>Orientação do time</li></ul></li>
-      <li><span class="n">06</span><h3>Evolução</h3><p class="t">Manutenção e melhorias opcionais após a entrega.</p><ul><li>Manutenção</li><li>Novas funcionalidades</li></ul></li>
+      <li><span class="n">01</span><h3>Diagnóstico</h3><p class="t">Entendimento do negócio, dos processos e das limitações atuais.</p><ul><li>Mapa do processo atual</li><li>Prioridades</li></ul></li>
+      <li><span class="n">02</span><h3>Validação de escopo</h3><p class="t">Solução, entregáveis, cronograma e investimento aprovados por escrito.</p><ul><li>Escopo por escrito</li><li>Cronograma e investimento</li></ul></li>
+      <li><span class="n">03</span><h3>Desenvolvimento e implementação</h3><p class="t">Versões por marco, validadas com a sua equipe, até o sistema entrar em operação.</p><ul><li>Versões por marco</li><li>Sistema em operação</li></ul></li>
+      <li><span class="n">04</span><h3>Suporte</h3><p class="t">Manutenção e melhorias opcionais após a entrega.</p><ul><li>Manutenção</li><li>Novas funcionalidades</li></ul></li>
     </ol>
     <ul class="method-points" data-reveal>
       <li><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span>Diagnóstico antes do código</span></li>
@@ -1113,7 +1144,7 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
       <li class="card"><h3>Sem licença obrigatória da Arke</h3><p>Não há mensalidade de licenciamento da Arke para uso do software entregue, quando assim contratado. Infraestrutura e serviços de terceiros podem gerar custos.</p></li>
       <li class="card"><h3>Suporte e evolução sob demanda</h3><p>Contratação opcional de manutenção, sustentação e novas funcionalidades.</p></li>
     </ul>
-    <div class="actions"><a class="btn btn-primary" href="#contato">Marcar conversa de 30 minutos</a></div>
+    <div class="actions"><a class="btn btn-primary" href="#contato">Marcar conversa</a></div>
   </div>
 </section>
 
@@ -1144,8 +1175,8 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
       <p class="lead">Conte o desafio que precisa resolver. A primeira conversa leva 30 minutos e não tem custo.</p>
       <p class="label contact-list-label">Ou fale direto</p>
       <ul class="contact-list">
-        <li><a class="contact-link" href="https://wa.me/558599500076" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.5 6.2 6.2l.9-1.3-1.8-1-.8.7c-1-.4-2.3-1.7-2.7-2.7l.7-.8-1-1.8z"/></svg><span>+55 85 9950-0076</span></a></li>
-        <li><a class="contact-link" href="https://wa.me/558586081055" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.5 6.2 6.2l.9-1.3-1.8-1-.8.7c-1-.4-2.3-1.7-2.7-2.7l.7-.8-1-1.8z"/></svg><span>+55 85 8608-1055</span></a></li>
+        <li><a class="contact-link" href="https://wa.me/5511978119471" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.5 6.2 6.2l.9-1.3-1.8-1-.8.7c-1-.4-2.3-1.7-2.7-2.7l.7-.8-1-1.8z"/></svg><span>+55 11 97811-9471</span></a></li>
+        <li><a class="contact-link" href="https://wa.me/558592983474" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9 8.8c-.3 2.6 3.6 6.5 6.2 6.2l.9-1.3-1.8-1-.8.7c-1-.4-2.3-1.7-2.7-2.7l.7-.8-1-1.8z"/></svg><span>+55 85 9298-3474</span></a></li>
       </ul>
     </div>
     <form class="form glass" id="contact-form" novalidate data-reveal>
@@ -1425,7 +1456,7 @@ h3 { font-size: clamp(1.22rem, 1.8cqi, 1.5rem); line-height: 1.25; letter-spacin
       lines.push(labels[k] + ': ' + v);
     });
     status.textContent = status.getAttribute('data-sent'); status.className = 'form-status is-ok';
-    window.open('https://wa.me/558599500076?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    window.open('https://wa.me/5511978119471?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
   });
 
   /* ---------- Idioma: guarda a escolha para o redirecionamento da raiz ---------- */

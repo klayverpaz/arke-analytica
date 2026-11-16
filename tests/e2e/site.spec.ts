@@ -28,7 +28,7 @@ for (const l of langs) {
       await expect(page.locator('.stat')).toHaveCount(4);
       await expect(page.locator('#solucoes .card')).toHaveCount(l.solutions);
       await expect(page.locator('#projetos .case')).toHaveCount(l.cases);
-      await expect(page.locator(l.steps)).toHaveCount(6);
+      await expect(page.locator(l.steps)).toHaveCount(4);
       // sem depoimentos, fundadores, logos ou placeholders
       const text = await page.locator('body').innerText();
       expect(text).not.toMatch(/\[(MARCA|PROJETO|FUNDADOR|Nome)/);
@@ -75,7 +75,7 @@ for (const l of langs) {
         page.locator('#contact-form button[type=submit]').click(),
       ]);
       const url = decodeURIComponent(popup.url());
-      expect(url).toContain('wa.me/558599500076');
+      expect(url).toContain('wa.me/5511978119471');
       expect(url).toContain('Maria Teste');
       expect(url).toContain('Planilhas demais');
       await expect(page.locator('.form-status')).toHaveClass(/is-ok/);
@@ -119,6 +119,14 @@ for (const code of ['pt', 'en']) test.describe(`home ${code}: página nova`, () 
     await page.goto(`/${code}/`);
     await expect(page.locator('.stats [data-to="30"]')).toHaveText('30');
     await expect(page.locator('#projetos .mo-road [data-set="3:1,5:2"]')).toHaveText('2');
+    // Kanban do funil: o negócio em negociação foi fechado e a nova oportunidade entrou
+    const kb = page.locator('.sc-kanban');
+    await expect(kb.locator('[data-set="2:1,4:2"]')).toHaveText('2');
+    await expect(kb.locator('[data-set="2:31,4:79"]')).toHaveText('79');
+    const x = async (sel: string) => (await kb.locator(sel).boundingBox())!.x;
+    expect(Math.abs((await x('.kF')) - (await x('.kG')))).toBeLessThan(1);
+    expect(Math.abs((await x('.kD')) - (await x('.kb-col:nth-child(3)')))).toBeLessThan(8);
+    await expect(kb.locator('.kH')).toHaveCSS('opacity', '1');
     await ctx.close();
   });
 });

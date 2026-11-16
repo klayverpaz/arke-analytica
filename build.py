@@ -13,7 +13,7 @@ ROOT = Path(__file__).parent
 BASE_URL = "https://klayverpaz.github.io/arke-analytica/"
 EMAIL = "arkeanalytica@gmail.com"
 # (número no formato wa.me, número como exibido)
-WHATSAPP = [("558599500076", "+55 85 9950-0076"), ("558586081055", "+55 85 8608-1055")]
+WHATSAPP = [("5511978119471", "+55 11 97811-9471"), ("558592983474", "+55 85 9298-3474")]
 PRIVACY_SLUG = {"pt": "privacidade", "en": "privacy"}
 
 ICONS = {
